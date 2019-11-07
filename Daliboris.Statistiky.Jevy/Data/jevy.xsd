@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://www.daliboris.cz/schemata/statistiky.xsd" xmlns:s="http://www.daliboris.cz/schemata/statistiky.xsd" attributeFormDefault="unqualified">
+  <xs:element name="jevy">
+    <xs:annotation id="an_jevy">
+      <xs:documentation xml:lang="cs">Přehled zaznamenaných jevů</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence >
+        <xs:element ref="s:j"   minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute use="required" ref="s:pocet"/>
+      <xs:attribute name="popis" use="optional" type="xs:string"/>
+      <xs:attribute type="xs:string" name="identifikator" use="optional"><xs:annotation>
+        <xs:documentation>Identifikátor (např. styl) použitý pro identifikaci jevu</xs:documentation>
+      </xs:annotation></xs:attribute>
+      <xs:attribute name="vytvoreno" use="required" type="xs:dateTime"></xs:attribute>
+      <xs:attribute name="zdroj" type="xs:string" use="required"></xs:attribute>
+      <xs:attribute name="jazyk" type="xs:language" use="required"></xs:attribute>
+      <xs:attribute name="typ" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="ostatni"/>
+            <xs:enumeration value="text"/>
+            <xs:enumeration value="slova"/>
+            <xs:enumeration value="znaky"/>
+            <xs:enumeration value="tagy"/>
+            <xs:enumeration value="atributy"/>
+            <xs:enumeration value="hodnoty"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="j">
+    <xs:annotation id="an_jev">
+      <xs:documentation xml:lang="cs">Informace o jednotlivém evidovaném jevu</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element  ref="s:o"  minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="s:detaily" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="s:lokace" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="n" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">Název jevu, popř. rovnou jeho obsah</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute use="required"  ref="s:p"  />
+      <xs:attribute name="r" use="optional">
+        <xs:annotation>
+          <xs:documentation>Retrográdní podoba textu (názvu); používá se většinou jenom u slova</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="o" type="xs:anyType">
+    <xs:annotation>
+      <xs:documentation>Konkrétní obsah jevu, může jít o text, popř. značkovaný text (např. ve formátu XML)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="detaily">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="s:d"  maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="d">
+    <xs:complexType>
+      <xs:attribute ref="s:pocet" use="required"></xs:attribute>
+      <xs:attribute name="popis" type="xs:string" use="required"></xs:attribute>
+      <xs:attribute name="identifikator" type="xs:string" use="required"></xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:attribute name="p" type="xs:int" >
+    <xs:annotation>
+      <xs:documentation>Počet výskytů jednotlivých charakteristik (jevů, detailů)</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute  name="pocet" type="xs:int">
+    <xs:annotation>
+      <xs:documentation>Počet výskytů jednotlivých charakteristik (jevů, detailů)</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:element name="lokace">
+   <xs:annotation>
+     <xs:documentation>Lokace, seznam likací, kde se jev nachází</xs:documentation>
+   </xs:annotation>
+    <xs:complexType>
+    <xs:sequence maxOccurs="unbounded">
+    <xs:element name="l">
+      <xs:annotation>
+        <xs:documentation>Seznam výskytů daného jevu</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:attribute name="l" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Lokace, identifikace různých výskytů jednotlivého jevu</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:complexType>
+    </xs:element>
+    </xs:sequence>
+      <xs:attribute use="required"  ref="s:p" />
+  </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.daliboris.cz/schemata/statistiky.xsd" xmlns:s="http://www.daliboris.cz/schemata/statistiky.xsd">
+  <xs:element name="jevy">
+    <xs:annotation id="an_jevy">
+      <xs:documentation xml:lang="cs">Přehled zaznamenaných jevů</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence >
+        <xs:element ref="s:polozky"  minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="s:detaily" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="identifikator" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Identifikátor (např. styl) použitý pro identifikaci jevu</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute use="required" ref="s:pocet"/>
+      <xs:attribute name="popis" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="jev">
+    <xs:annotation id="an_jev">
+      <xs:documentation xml:lang="cs">Informace o jednotlivém evidovaném jevu</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="s:obsah" />
+        <xs:element minOccurs="0" ref="s:detaily" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="nazev" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">Název jevu, popř. rovnou jeho obsah</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute  use="required" ref="s:pocet"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="obsah" type="xs:anyType">
+    <xs:annotation>
+      <xs:documentation>Konkrétní obsah jev, může jít o text, popř. značkovaný text (např. ve formátu XML)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="polozky">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="s:jev"/>
+      </xs:sequence>
+      <xs:attribute ref="s:pocet"></xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="detaily">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="s:jevy"/>
+      </xs:sequence>
+      <xs:attribute ref="s:pocet"></xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:attribute name="pocet" type="xs:int"></xs:attribute>
+</xs:schema>

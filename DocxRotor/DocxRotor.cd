@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Daliboris.Statistiky.Word.DocxRotor">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="Daliboris.Statistiky.Word.DocxRotor.Progress" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DocxRotor.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Class Name="Daliboris.Statistiky.Word.DocxRotor.Nastaveni" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DocxRotor.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAACEAAAAAAAAAAAAkgAggAggEAAQwAQIAAIAxAo=</HashCode>
+      <FileName>DocxRotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

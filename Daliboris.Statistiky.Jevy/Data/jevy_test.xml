@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<jevy pocet="2" popis="Heslový odstavec" identifikator="Heslovy_odstavec" xmlns="http://www.daliboris.cz/schemata/statistiky.xsd">
+ <j n="text odstavce" p="22" />
+ <j n="text odstavce 2" p="3" />
+</jevy>

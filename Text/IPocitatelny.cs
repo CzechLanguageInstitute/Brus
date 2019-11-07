@@ -1,0 +1,1 @@
+﻿interface IPocitatelny { int Pocet { get; set; } }
