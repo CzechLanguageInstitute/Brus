@@ -10,6 +10,7 @@ Nástroj pro analýzu obsahu wordovských dokumentů. Rozloží text na odstavce
   - .NET Framework 4.0 Client Profile
 - Git (version 2.19 or newer)
 - JetBrains ReSharper (recommended)
+- [Microsoft Ribbon for WPF October 2010](https://www.microsoft.com/en-us/download/details.aspx?id=11877) 
 
 ### Installing
 
@@ -41,4 +42,4 @@ Kliknutím na některou položku v seznamu **Znaky**, **Slova**, **Úseky**, **D
 
 ## Authors
 
-* **Boris Lehečka** - *The first version of eEdice and architecture* 
+* **Boris Lehečka** - *The first version of Brus and architecture* 
