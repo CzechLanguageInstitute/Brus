@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Daliboris.Statistiky.UI.WPF</RootNamespace>
     <AssemblyName>Brus</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -101,6 +102,25 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e">
+      <HintPath>..\packages\ControlzEx.4.2.0\lib\net462\ControlzEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Fluent, Version=7.0.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f">
+      <HintPath>..\packages\Fluent.Ribbon.7.0.1\lib\net462\Fluent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.3\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="RibbonControlsLibrary, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\..\..\Program Files (x86)\Microsoft Ribbon for WPF\V3.5\RibbonControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Ricciolo.Controls.TreeListView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ffedd4b1334b06f5">
+      <HintPath>..\External\TreeView\Ricciolo.Controls.TreeListView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -111,17 +131,31 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RibbonControlsLibrary" />
     <Reference Include="Microsoft.Windows.Shell" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\FileSelector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PrehledyStatistik.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VyberAZpracovaniSouboru.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -130,6 +164,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\FileSelector.xaml.cs">
+      <DependentUpon>FileSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HiglightableTextBlock.cs" />
+    <Compile Include="Controls\PrehledyStatistik.xaml.cs">
+      <DependentUpon>PrehledyStatistik.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VyberAZpracovaniSouboru.xaml.cs">
+      <DependentUpon>VyberAZpracovaniSouboru.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Konvertory\BooleanToHiddenVisibility.cs" />
+    <Compile Include="Konvertory\Character2Kod.cs" />
+    <Compile Include="Konvertory\String2Int32.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -153,6 +200,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -160,6 +208,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Browse.png" />
     <Resource Include="Images\LargeIcon.png" />
     <Resource Include="Images\SmallIcon.png" />
   </ItemGroup>
@@ -177,9 +226,25 @@
     <Resource Include="Images\1532_Flag_system_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Prehledy\Prehledy.csproj">
-      <Project>{fc173251-6de3-4774-80f4-24132bdb3a29}</Project>
-      <Name>Prehledy</Name>
+    <ProjectReference Include="..\Daliboris.Statistiky.Jevy.Rozhrani\Daliboris.Statistiky.Rozhrani.Jevy.csproj">
+      <Project>{1052054f-acec-432e-b61b-131b15d6350c}</Project>
+      <Name>Daliboris.Statistiky.Rozhrani.Jevy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Daliboris.Statistiky.Jevy\Daliboris.Statistiky.Jevy.csproj">
+      <Project>{21144a27-0669-4236-863d-e4187e7e90fa}</Project>
+      <Name>Daliboris.Statistiky.Jevy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Daliboris.Statistiky.Ukazy\Daliboris.Statistiky.Ukazy.csproj">
+      <Project>{a4960882-f2f1-4e0f-8159-a6177d4c467a}</Project>
+      <Name>Daliboris.Statistiky.Ukazy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocxRotor\DocxRotor.csproj">
+      <Project>{a85fcd6b-6fa1-46bc-91f5-8f90be8a7362}</Project>
+      <Name>DocxRotor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Statistik\Statistik.csproj">
+      <Project>{cb14d27d-a05e-46c9-a871-e4353924c038}</Project>
+      <Name>Statistik</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

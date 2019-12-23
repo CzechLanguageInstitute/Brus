@@ -137,24 +137,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Jev.cs" />
-    <Compile Include="jevy.cs" />
-    <Compile Include="JevyCollection.cs" />
-    <Compile Include="ObjectComparer.cs" />
-    <Compile Include="Prehledy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RazeniJevu.cs" />
-    <Compile Include="ReversibleSortedList.cs" />
-    <Compile Include="SkupinaJevu.cs" />
-    <Compile Include="Sprava.cs" />
-    <Compile Include="SqlPropertyDescriptor.cs" />
-    <Compile Include="Statistiky.cs" />
-    <Compile Include="Zdroj.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -169,12 +157,9 @@
       <Name>Daliboris.Pomucky.Xml</Name>
     </ProjectReference>
     <ProjectReference Include="..\Daliboris.Statistiky.Jevy.Rozhrani\Daliboris.Statistiky.Rozhrani.Jevy.csproj">
-      <Project>{1052054F-ACEC-432E-B61B-131B15D6350C}</Project>
+      <Project>{1052054f-acec-432e-b61b-131b15d6350c}</Project>
       <Name>Daliboris.Statistiky.Rozhrani.Jevy</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\jevy.xsd" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -192,6 +177,9 @@
       <ProductName>Instalační služba systému Windows 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

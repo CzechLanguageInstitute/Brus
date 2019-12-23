@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Daliboris.Statistiky.Word</RootNamespace>
     <AssemblyName>Daliboris.Statistiky.Word.DocxRotor</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,7 +31,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -134,13 +135,13 @@
       <Project>{96838f37-2e15-4785-b117-0de31494f733}</Project>
       <Name>Daliboris.OOXML.Word</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Daliboris.Statistiky.Jevy.Rozhrani\Daliboris.Statistiky.Rozhrani.Jevy.csproj">
+      <Project>{1052054f-acec-432e-b61b-131b15d6350c}</Project>
+      <Name>Daliboris.Statistiky.Rozhrani.Jevy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Daliboris.Statistiky.Jevy\Daliboris.Statistiky.Jevy.csproj">
       <Project>{21144A27-0669-4236-863D-E4187E7E90FA}</Project>
       <Name>Daliboris.Statistiky.Jevy</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Daliboris.Statistiky.Jevy.Rozhrani\Daliboris.Statistiky.Rozhrani.Jevy.csproj">
-      <Project>{1052054F-ACEC-432E-B61B-131B15D6350C}</Project>
-      <Name>Daliboris.Statistiky.Rozhrani.Jevy</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

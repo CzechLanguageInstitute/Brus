@@ -30,7 +30,7 @@ namespace Daliboris.Statistiky {
 
 		public Jevy NactiZeSouboru() {
 			jevy jvs;
-			jvs = (jevy)Serializace.NacistZXml(mstrSouborUlozeni, typeof(jevy));
+			jvs = (jevy)Daliboris.Pomucky.Xml.Serializace.NacistZXml(mstrSouborUlozeni, typeof(jevy));
 			string sJazyk = jvs.jazyk;
 
 			Jevy jvJevy = new Jevy();
@@ -83,11 +83,11 @@ namespace Daliboris.Statistiky {
 				}
 				jvs.j = jv;
 			}
-			System.Xml.Serialization.XmlSerializerNamespaces xsn = new XmlSerializerNamespaces();
+			XmlSerializerNamespaces xsn = new XmlSerializerNamespaces();
 			xsn.Add(String.Empty, "http://www.daliboris.cz/schemata/statistiky.xsd");
 			xsn.Add("q", "http://microsoft.com/wsdl/types/");
 			xsn.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-			Serializace.UlozitDoXml(jvs, mstrSouborUlozeni, xsn);
+			Daliboris.Pomucky.Xml.Serializace.UlozitDoXml(jvs, mstrSouborUlozeni, xsn);
 
 		}
 
@@ -181,7 +181,7 @@ namespace Daliboris.Statistiky {
 			xsn.Add(String.Empty, "http://www.daliboris.cz/schemata/statistiky.xsd");
 			xsn.Add("q", "http://microsoft.com/wsdl/types/");
 			xsn.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-			Serializace.UlozitDoXml(jvs, strSoubor, xsn);
+			Daliboris.Pomucky.Xml.Serializace.UlozitDoXml(jvs, strSoubor, xsn);
 		}
 
 		public void UlozDoSouboru(Jevy jvJevy, string strSoubor) {

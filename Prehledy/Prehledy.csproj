@@ -120,17 +120,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileSelector.xaml.cs">
-      <DependentUpon>FileSelector.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HiglightableTextBlock.cs" />
-    <Compile Include="Konvertory\BooleanToHiddenVisibility.cs" />
-    <Compile Include="Konvertory\Character2Kod.cs" />
-    <Compile Include="Konvertory\String2Int32.cs" />
-    <Compile Include="Pomucky.cs" />
-    <Compile Include="PrehledyStatistik.xaml.cs">
-      <DependentUpon>PrehledyStatistik.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -144,9 +133,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="VyberAZpracovaniSouboru.xaml.cs">
-      <DependentUpon>VyberAZpracovaniSouboru.xaml</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -156,20 +142,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="FileSelector.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="PrehledyStatistik.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VyberAZpracovaniSouboru.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Daliboris.Statistiky.Jevy.Rozhrani\Daliboris.Statistiky.Rozhrani.Jevy.csproj">
@@ -194,7 +166,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Browse.png" />
+    <Folder Include="Images" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

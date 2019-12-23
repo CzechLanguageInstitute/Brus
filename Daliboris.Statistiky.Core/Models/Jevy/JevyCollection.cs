@@ -219,7 +219,7 @@ namespace Daliboris.Statistiky {
 
 		#endregion
 
-		public IEnumerable<Jev> Seradit(SortDescription srdPopisRazeni) {
+		/*public IEnumerable<Jev> Seradit(SortDescription srdPopisRazeni) {
 			List<Jev> lsJevy = new List<Jev>(this);
 			if (srdPopisRazeni.PropertyName == "Nazev") {
 				if (srdPopisRazeni.Direction == ListSortDirection.Ascending)
@@ -234,7 +234,7 @@ namespace Daliboris.Statistiky {
 					lsJevy.Sort(delegate(Jev x, Jev y) { return -x.Pocet.CompareTo(y.Pocet); });
 			}
 			return lsJevy;
-		}
+		}*/
 
 /*
 		IEnumerable<IJev> Seradit(SortDescription srdPopisRazeni) {

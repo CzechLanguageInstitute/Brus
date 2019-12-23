@@ -5,7 +5,9 @@ using System.Collections.Generic;
 
 namespace Daliboris.Pomucky.Xml
 {
-    public static class Transformace
+    
+    
+    public static  class Transformace_x
     {
 
         /// <summary>
