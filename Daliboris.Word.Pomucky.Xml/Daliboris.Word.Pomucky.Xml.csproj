@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <RootNamespace>Daliboris.Pomucky.Xml</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="XmlDiffPatch.Core" Version="1.0.1" />
+    </ItemGroup>
+    
+
+</Project>

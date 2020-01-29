@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 
 namespace Daliboris.Statistiky {
-	class AdresarovaStruktura {
+	public class AdresarovaStruktura 
+	{
 		public const string OdstavcoveStyly = "os";
 		public const string ZnakoveStyly = "zs";
 		public const string Statistika = "st";
@@ -13,6 +14,5 @@ namespace Daliboris.Statistiky {
 		public const string Znaky = "znaky";
 		public const string Styl = "styl";
 		public const string Obsah = "obsah";
-
 	}
 }

@@ -101,6 +101,9 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e">
       <HintPath>..\packages\ControlzEx.4.2.0\lib\net462\ControlzEx.dll</HintPath>
@@ -115,14 +118,19 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="RibbonControlsLibrary, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\..\..\Program Files (x86)\Microsoft Ribbon for WPF\V3.5\RibbonControlsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Ricciolo.Controls.TreeListView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ffedd4b1334b06f5">
       <HintPath>..\External\TreeView\Ricciolo.Controls.TreeListView.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.7.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -144,6 +152,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\NacitaniObsahu.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ZpracovaniSouboruViewModel.cs" />
     <Page Include="Controls\FileSelector.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -152,7 +165,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\VyberAZpracovaniSouboru.xaml">
+    <Page Include="Controls\ZpracovaniSouboru.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -171,12 +184,12 @@
     <Compile Include="Controls\PrehledyStatistik.xaml.cs">
       <DependentUpon>PrehledyStatistik.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\VyberAZpracovaniSouboru.xaml.cs">
-      <DependentUpon>VyberAZpracovaniSouboru.xaml</DependentUpon>
+    <Compile Include="Controls\ZpracovaniSouboru.xaml.cs">
+      <DependentUpon>ZpracovaniSouboru.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Konvertory\BooleanToHiddenVisibility.cs" />
-    <Compile Include="Konvertory\Character2Kod.cs" />
-    <Compile Include="Konvertory\String2Int32.cs" />
+    <Compile Include="Converters\BooleanToHiddenVisibility.cs" />
+    <Compile Include="Converters\Character2Kod.cs" />
+    <Compile Include="Converters\String2Int32.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -226,26 +239,27 @@
     <Resource Include="Images\1532_Flag_system_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Daliboris.Statistiky.Jevy.Rozhrani\Daliboris.Statistiky.Rozhrani.Jevy.csproj">
-      <Project>{1052054f-acec-432e-b61b-131b15d6350c}</Project>
-      <Name>Daliboris.Statistiky.Rozhrani.Jevy</Name>
+    <ProjectReference Include="..\Daliboris.Statistiky.Core\Daliboris.Statistiky.Core.csproj">
+      <Project>{7c5a3b99-b366-45cd-bb69-ff804bb60207}</Project>
+      <Name>Daliboris.Statistiky.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Daliboris.Statistiky.Jevy\Daliboris.Statistiky.Jevy.csproj">
-      <Project>{21144a27-0669-4236-863d-e4187e7e90fa}</Project>
-      <Name>Daliboris.Statistiky.Jevy</Name>
+    <ProjectReference Include="..\Daliboris.Word.Pomucky.Xml\Daliboris.Word.Pomucky.Xml.csproj">
+      <Project>{457fef12-bd22-4498-924f-941b31dccd6b}</Project>
+      <Name>Daliboris.Word.Pomucky.Xml</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Daliboris.Statistiky.Ukazy\Daliboris.Statistiky.Ukazy.csproj">
-      <Project>{a4960882-f2f1-4e0f-8159-a6177d4c467a}</Project>
-      <Name>Daliboris.Statistiky.Ukazy</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DocxRotor\DocxRotor.csproj">
+    <ProjectReference Include="..\Daliboris.Word\Daliboris.Word.csproj">
       <Project>{a85fcd6b-6fa1-46bc-91f5-8f90be8a7362}</Project>
-      <Name>DocxRotor</Name>
+      <Name>Daliboris.Word</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Statistik\Statistik.csproj">
-      <Project>{cb14d27d-a05e-46c9-a871-e4353924c038}</Project>
-      <Name>Statistik</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Editovat_soubor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

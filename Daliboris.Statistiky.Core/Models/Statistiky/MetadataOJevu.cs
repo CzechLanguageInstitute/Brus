@@ -17,7 +17,7 @@ namespace Daliboris.Statistiky
         /// <summary>
         /// Typ jevu
         /// </summary>
-        TypJevu Typ { get; set; }
+        TypJevu Druh { get; set; }
 
         /// <summary>
         /// Pořadí jevu v rámci balíčku

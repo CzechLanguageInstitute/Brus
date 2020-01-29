@@ -4,6 +4,6 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 		<!-- Resources scoped at the Application level should be defined here. -->
-        
+		<ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
     </Application.Resources>
 </Application>

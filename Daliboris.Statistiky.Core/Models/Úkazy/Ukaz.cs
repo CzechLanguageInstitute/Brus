@@ -6,7 +6,8 @@ using System.Reflection;
 using System.Xml.Serialization;
 using Daliboris.Statistiky.Rozhrani.Jevy;
 
-namespace Daliboris.Statistiky {
+namespace Daliboris.Statistiky 
+{
 	[XmlRoot(ElementName="u")]
 	public class Ukaz : IJev, INotifyPropertyChanged, IComparable{
 
