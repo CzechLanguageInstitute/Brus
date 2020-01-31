@@ -7,8 +7,7 @@ using System.Linq;
 using System.Net.Mime;
 using System.Xml;
 using Daliboris.Statistiky.Core.Models.Jevy.XML;
-using Daliboris.Statistiky.Rozhrani.Jevy;
-using Daliboris.Text;
+using Daliboris.Word.Text;
 
 namespace Daliboris.Statistiky.Core.Services
 {
@@ -1077,7 +1076,7 @@ namespace Daliboris.Statistiky.Core.Services
                     string[] asSlova = Slova.RozdelitTextNaSlova(sText, OdstranitTecku);
                     foreach (string sSlovo in asSlova)
                     {
-                        Jev j = new Jev(jv.Jazyk, sSlovo, null, Text.Slovo.Retrograd(sSlovo), jv.Pocet);
+                        Jev j = new Jev(jv.Jazyk, sSlovo, null, Slovo.Retrograd(sSlovo), jv.Pocet);
                         foreach (string kontext in jv.Kontexty)
                         {
                             if (!j.Kontexty.Contains(kontext.Trim()))
@@ -1285,10 +1284,10 @@ namespace Daliboris.Statistiky.Core.Services
                     foreach (Jev jv in kvp)
                     {
                         string sText = jv.Nazev;
-                        string[] asSlova = Text.Slova.RozdelitTextNaSlova(sText, OdstranitTecku);
+                        string[] asSlova = Slova.RozdelitTextNaSlova(sText, OdstranitTecku);
                         foreach (string sSlovo in asSlova)
                         {
-                            Jev j = new Jev(jv.Jazyk, sSlovo, null, Text.Slovo.Retrograd(sSlovo), jv.Pocet);
+                            Jev j = new Jev(jv.Jazyk, sSlovo, null, Slovo.Retrograd(sSlovo), jv.Pocet);
                             jvSlova.Add(j);
                             if (jvVsechnaSlova != null)
                                 jvVsechnaSlova.Add(j);

@@ -11,7 +11,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Daliboris.Word.Core\Daliboris.Word.Core.csproj" />
       <ProjectReference Include="..\Daliboris.Word.Pomucky.Xml\Daliboris.Word.Pomucky.Xml.csproj" />
-      <ProjectReference Include="..\Text\Daliboris.Word.Text.csproj" />
+      <ProjectReference Include="..\Daliboris.Word.Text\Daliboris.Word.Text.csproj" />
     </ItemGroup>
     
 

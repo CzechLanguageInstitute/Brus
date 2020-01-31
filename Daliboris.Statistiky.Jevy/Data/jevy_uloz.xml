@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<jevy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" pocet="2" popis="Heslový odstavec" identifikator="Heslovy_odstavec" vytvoreno="2008-11-08T18:49:13.3629055+01:00" zdroj="Zdroj" xmlns="http://www.daliboris.cz/schemata/statistiky.xsd">
- <j n="další text" p="33">
-  <o xsi:type="xsd:string">další text</o>
- </j>
- <j n="text" p="22">
-  <o xsi:type="xsd:string">text obsahu</o>
- </j>
-</jevy>

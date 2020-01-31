@@ -76,7 +76,9 @@
           <e p="SavingTools.cs" t="Include" />
           <e p="StatisticsService.cs" t="Include" />
         </e>
+        <e p="Statistiky.cd" t="Include" />
         <e p="Tools" t="Include" />
+        <e p="Ukazy2.cs" t="Include" />
       </e>
       <e p="Daliboris.Statistiky.UI.WPF" t="IncludeRecursive">
         <e p="App.xaml" t="Include" />
@@ -118,7 +120,6 @@
             <e p="App.g.cs" t="Include" />
             <e p="Controls" t="Include">
               <e p="FileSelector.g.cs" t="Include" />
-              <e p="PrehledyStatistik.g.cs" t="Include" />
               <e p="ZpracovaniSouboru.g.cs" t="Include" />
             </e>
             <e p="GeneratedInternalTypeHelper.g.cs" t="Include" />
@@ -217,23 +218,17 @@
         <e p="Transformace_x.cs" t="Include" />
         <e p="VyclenenaMezera.cs" t="Include" />
       </e>
-      <e p="External\TreeView\Ricciolo.Controls.TreeListView.dll" t="Include" />
-      <e p="External\TreeView\Ricciolo.Controls.TreeListView.pdb" t="Include" />
-      <e p="Externals" t="Include" />
-      <e p="packages" t="ExcludeRecursive" />
-      <e p="Tests" t="Include">
-        <e p="AdamM.docx" t="Include" />
-        <e p="AdamM.pjv" t="Include" />
-      </e>
-      <e p="Text" t="IncludeRecursive">
+      <e p="Daliboris.Word.Text" t="IncludeRecursive">
         <e p="AssemblyInfo.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Daliboris.Word.Text.csproj" t="IncludeRecursive" />
         <e p="Digram.cs" t="Include" />
         <e p="Grafem.cs" t="Include" />
-        <e p="IGram.cs" t="Include" />
-        <e p="IPocitatelny.cs" t="Include" />
-        <e p="IShoda.cs" t="Include" />
+        <e p="Interfaces" t="Include">
+          <e p="IGram.cs" t="Include" />
+          <e p="IPocitatelny.cs" t="Include" />
+          <e p="IShoda.cs" t="Include" />
+        </e>
         <e p="NGram.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
         <e p="PorovnavacTextu.cs" t="Include" />
@@ -251,7 +246,14 @@
         <e p="Znak.cs" t="Include" />
         <e p="ZpusobRazeni.cs" t="Include" />
       </e>
-      <e p="Tools" t="Include" />
+      <e p="External\TreeView\Ricciolo.Controls.TreeListView.dll" t="Include" />
+      <e p="External\TreeView\Ricciolo.Controls.TreeListView.pdb" t="Include" />
+      <e p="Externals" t="Include" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Tests" t="Include">
+        <e p="AdamM.docx" t="Include" />
+        <e p="AdamM.pjv" t="Include" />
+      </e>
     </e>
     <e p="C:\Users\madrvojt\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\madrvojt\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Brus.2132534291.00" t="ExcludeRecursive" />
