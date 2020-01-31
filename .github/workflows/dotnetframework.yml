@@ -9,6 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+       ref: feature-refactor
     - uses: nuget/setup-nuget@v1
     - name: Nuget restore
       run: nuget restore $Env:GITHUB_WORKSPACE\Brus.sln
