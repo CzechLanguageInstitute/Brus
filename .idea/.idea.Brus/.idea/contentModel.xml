@@ -120,6 +120,7 @@
             <e p="App.g.cs" t="Include" />
             <e p="Controls" t="Include">
               <e p="FileSelector.g.cs" t="Include" />
+              <e p="PrehledyStatistik.g.cs" t="Include" />
               <e p="ZpracovaniSouboru.g.cs" t="Include" />
             </e>
             <e p="GeneratedInternalTypeHelper.g.cs" t="Include" />
@@ -246,9 +247,6 @@
         <e p="Znak.cs" t="Include" />
         <e p="ZpusobRazeni.cs" t="Include" />
       </e>
-      <e p="External\TreeView\Ricciolo.Controls.TreeListView.dll" t="Include" />
-      <e p="External\TreeView\Ricciolo.Controls.TreeListView.pdb" t="Include" />
-      <e p="Externals" t="Include" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Tests" t="Include">
         <e p="AdamM.docx" t="Include" />

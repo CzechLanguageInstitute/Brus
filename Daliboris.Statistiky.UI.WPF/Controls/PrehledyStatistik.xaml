@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:th="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-             xmlns:r="clr-namespace:Ricciolo.Controls;assembly=Ricciolo.Controls.TreeListView"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:Daliboris.Statistiky.UI.WPF.Converters"
              xmlns:st="clr-namespace:Daliboris.Statistiky;assembly=Daliboris.Statistiky.Core"
+             xmlns:treeview="http://schemas.aspitalia.com/Ricciolo/Controls"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="1000">
     <!-- Dictionary -->
@@ -209,11 +208,11 @@
 
         <ScrollViewer x:Name="ScvPosunovacStatistiky" Grid.Column="0" VerticalScrollBarVisibility="Auto">
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                <r:TreeListView x:Name="tlvStatistiky"
+                <treeview:TreeListView x:Name="tlvStatistiky"
                                 ItemsSource="{Binding XPath=/statistiky/statistika}"
                                 ItemTemplate="{StaticResource dt}" Margin="0,0,0,0"
                                 VerticalAlignment="Top">
-                    <r:TreeListView.Columns>
+                    <treeview:TreeListView.Columns>
                         <GridViewColumn Header="" CellTemplate="{StaticResource dtObsahPrvky}" Width="300" />
                         <GridViewColumn CellTemplate="{StaticResource dtObsahZnaky}" Width="60">
                             <GridViewColumnHeader>
@@ -250,8 +249,8 @@
                                 </StackPanel>
                             </GridViewColumnHeader>
                         </GridViewColumn>
-                    </r:TreeListView.Columns>
-                </r:TreeListView>
+                    </treeview:TreeListView.Columns>
+                </treeview:TreeListView>
             </StackPanel>
         </ScrollViewer>
 

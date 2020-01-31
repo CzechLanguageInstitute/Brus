@@ -11,12 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daliboris.Word", "Daliboris
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daliboris.Word.Core", "Daliboris.Word.Core\Daliboris.Word.Core.csproj", "{96838F37-2E15-4785-B117-0DE31494F733}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Externals", "Externals", "{20EB3BC2-E9B1-44BF-A02B-00E80071FD92}"
-	ProjectSection(SolutionItems) = preProject
-		External\TreeView\Ricciolo.Controls.TreeListView.dll = External\TreeView\Ricciolo.Controls.TreeListView.dll
-		External\TreeView\Ricciolo.Controls.TreeListView.pdb = External\TreeView\Ricciolo.Controls.TreeListView.pdb
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{77CC5889-16A1-4823-882C-F9EF0A1D3131}"
 	ProjectSection(SolutionItems) = preProject
 		Tests\AdamM.docx = Tests\AdamM.docx
