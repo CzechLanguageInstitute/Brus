@@ -16,35 +16,33 @@ namespace Daliboris.Statistiky.UI.WPF.Controls
     /// </summary>
     public partial class PrehledyStatistik : UserControl
     {
-        public static readonly DependencyProperty StatisticFileProperty = DependencyProperty.Register("StatisticFile",
-            typeof(string), typeof(PrehledyStatistik),
-            new FrameworkPropertyMetadata(false, SouborStatistikPropertyChanged));
-
-        public string StatisticFile
-        {
-            get { return (string) GetValue(StatisticFileProperty); }
-            set { SetValue(StatisticFileProperty, value); }
-        }
-
-        private static void SouborStatistikPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            PrehledyStatistik owner = (PrehledyStatistik) d;
-            string newValue = (string) e.NewValue;
-
-            //TODO provide implementation
-            //throw new NotImplementedException("Change event handler for dependency property SouborStatistik not implemented.");
-            // owner.SouborStatistik = newValue;
-            owner.NactiSouborStatistik();
-        }
+        // public static readonly DependencyProperty StatisticFileProperty = DependencyProperty.Register("StatisticFile",
+        //     typeof(string), typeof(PrehledyStatistik),
+        //     new FrameworkPropertyMetadata(false, SouborStatistikPropertyChanged));
+        //
+        // public string StatisticFile
+        // {
+        //     get { return (string) GetValue(StatisticFileProperty); }
+        //     set { SetValue(StatisticFileProperty, value); }
+        // }
+        //
+        // private static void SouborStatistikPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        // {
+        //     //PrehledyStatistik owner = (PrehledyStatistik) d;
+        //     //string newValue = (string) e.NewValue;
+        //
+        //     //TODO provide implementation
+        //     //throw new NotImplementedException("Change event handler for dependency property SouborStatistik not implemented.");
+        //     // owner.SouborStatistik = newValue;
+        //     // owner.NactiSouborStatistik();
+        // }
 
 
         public PrehledyStatistik()
         {
             InitializeComponent();
             IdentifikujPromenne();
-            NactiSouborStatistik();
         }
-
 
         private BackgroundWorker mbgwNacitaniJevu;
         private BackgroundWorker mbgwFiltrovani;
@@ -56,25 +54,25 @@ namespace Daliboris.Statistiky.UI.WPF.Controls
         //private bool mblnFiltrovatAutomaticky;
         //private bool mblnSlovaZacinajiciMalymPismenem;
 
-        static PrehledyStatistik()
-        {
-            FrameworkPropertyMetadata mdfa = new FrameworkPropertyMetadata(false, FiltrovatAutomatickyPropertyChanged);
-            FiltrovatAutomatickyProperty = DependencyProperty.Register("FiltrovatAutomaticky", typeof(bool),
-                typeof(PrehledyStatistik), mdfa);
-
-            FrameworkPropertyMetadata mdrvp =
-                new FrameworkPropertyMetadata(true, RozlisovatVelikostPismenPropertyChanged);
-            RozlisovatVelikostPismenProperty = DependencyProperty.Register("RozlisovatVelikostPismen", typeof(bool),
-                typeof(PrehledyStatistik), mdrvp);
-
-            FrameworkPropertyMetadata mdht = new FrameworkPropertyMetadata(String.Empty, HledanyTextPropertyChanged);
-            HledanyTextProperty =
-                DependencyProperty.Register("HledanyText", typeof(string), typeof(PrehledyStatistik), mdht);
-
-            FrameworkPropertyMetadata mdvt = new FrameworkPropertyMetadata(13d, VelikostTextuPropertyChanged);
-            VelikostTextuProperty =
-                DependencyProperty.Register("VelikostTextu", typeof(double), typeof(PrehledyStatistik), mdvt);
-        }
+        // static PrehledyStatistik()
+        // {
+        //     FrameworkPropertyMetadata mdfa = new FrameworkPropertyMetadata(false, FiltrovatAutomatickyPropertyChanged);
+        //     FiltrovatAutomatickyProperty = DependencyProperty.Register("FiltrovatAutomaticky", typeof(bool),
+        //         typeof(PrehledyStatistik), mdfa);
+        //
+        //     FrameworkPropertyMetadata mdrvp =
+        //         new FrameworkPropertyMetadata(true, RozlisovatVelikostPismenPropertyChanged);
+        //     RozlisovatVelikostPismenProperty = DependencyProperty.Register("RozlisovatVelikostPismen", typeof(bool),
+        //         typeof(PrehledyStatistik), mdrvp);
+        //
+        //     FrameworkPropertyMetadata mdht = new FrameworkPropertyMetadata(String.Empty, HledanyTextPropertyChanged);
+        //     HledanyTextProperty =
+        //         DependencyProperty.Register("HledanyText", typeof(string), typeof(PrehledyStatistik), mdht);
+        //
+        //     FrameworkPropertyMetadata mdvt = new FrameworkPropertyMetadata(13d, VelikostTextuPropertyChanged);
+        //     VelikostTextuProperty =
+        //         DependencyProperty.Register("VelikostTextu", typeof(double), typeof(PrehledyStatistik), mdvt);
+        // }
 
 
         /*
@@ -326,37 +324,37 @@ public static readonly DependencyProperty SouborStatistikProperty =
             // mgdcUkazy.Add(dtgUseky.Tag.ToString(), new Ukazy("Useky"));
         }
 
-        private void NactiSouborStatistik()
-        {
-            //@"V:\Projekty\Daliboris\Statistiky\Data\SlovKlem.docx.pjv";
-            /* @"D:\Slovniky\ESSC\Text\Word\Hotovo\Pismena\ESSC_Ž.docx.pjv";
-                @"D:\Slovniky\ESSC\Text\Word\Hotovo\Pismena\ESSC_Z.docx.pjv";
-                @"V:\Projekty\Daliboris\Statistiky\Data\ŠtítSvátA kontrola.docx.pjv";
-            */
-            string sSoubor = StatisticFile;
-            if (String.IsNullOrEmpty(sSoubor))
-                return;
+        // private void NactiSouborStatistik()
+        // {
+        //     //@"V:\Projekty\Daliboris\Statistiky\Data\SlovKlem.docx.pjv";
+        //     /* @"D:\Slovniky\ESSC\Text\Word\Hotovo\Pismena\ESSC_Ž.docx.pjv";
+        //         @"D:\Slovniky\ESSC\Text\Word\Hotovo\Pismena\ESSC_Z.docx.pjv";
+        //         @"V:\Projekty\Daliboris\Statistiky\Data\ŠtítSvátA kontrola.docx.pjv";
+        //     */
+        //     string sSoubor = StatisticFile;
+        //     if (String.IsNullOrEmpty(sSoubor))
+        //         return;
+        //
+        //     XmlDocument xd = null;
+        //
+        //     if (File.Exists(sSoubor))
+        //     {
+        //         xd = StatisticsService.NactiDataStatistiky(sSoubor);
+        //     }
+        //     //if (xd != null)
+        //
+        //     VycistitDatoveMrizky();
+        //
+        //     //  tlvStatistiky.DataContext = xd;
+        // }
 
-            XmlDocument xd = null;
-
-            if (File.Exists(sSoubor))
-            {
-                xd = StatisticsService.NactiDataStatistiky(sSoubor);
-            }
-            //if (xd != null)
-
-            VycistitDatoveMrizky();
-
-            //  tlvStatistiky.DataContext = xd;
-        }
-
-        private void VycistitDatoveMrizky()
-        {
-            foreach (KeyValuePair<string, DataGrid> kvp in mgdcTabulky)
-            {
-                kvp.Value.ItemsSource = null;
-            }
-        }
+        // private void VycistitDatoveMrizky()
+        // {
+        //     foreach (KeyValuePair<string, DataGrid> kvp in mgdcTabulky)
+        //     {
+        //         kvp.Value.ItemsSource = null;
+        //     }
+        // }
 
         private void NastavitVelikostTextu()
         {
@@ -367,24 +365,24 @@ public static readonly DependencyProperty SouborStatistikProperty =
             }
         }
 
-        private void tlvStatistiky_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            object o = e.NewValue;
-            XmlNode xn = o as XmlNode;
-            if (xn == null)
-                return;
-            XmlAttribute xa = xn.Attributes["id"];
-            if (xa == null)
-                return;
-
-            mbgwNacitaniJevu = new BackgroundWorker();
-            mbgwNacitaniJevu.DoWork += new DoWorkEventHandler(bgwNacitaniJevu_DoWork);
-            mbgwNacitaniJevu.RunWorkerCompleted +=
-                new RunWorkerCompletedEventHandler(bgwNacitaniJevu_RunWorkerCompleted);
-            Mouse.OverrideCursor = Cursors.Wait;
-            NacitaniObsahu np = new NacitaniObsahu(StatisticFile, xa.Value);
-            mbgwNacitaniJevu.RunWorkerAsync(np);
-        }
+        // private void tlvStatistiky_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        // {
+        //     object o = e.NewValue;
+        //     XmlNode xn = o as XmlNode;
+        //     if (xn == null)
+        //         return;
+        //     XmlAttribute xa = xn.Attributes["id"];
+        //     if (xa == null)
+        //         return;
+        //
+        //     mbgwNacitaniJevu = new BackgroundWorker();
+        //     mbgwNacitaniJevu.DoWork += new DoWorkEventHandler(bgwNacitaniJevu_DoWork);
+        //     mbgwNacitaniJevu.RunWorkerCompleted +=
+        //         new RunWorkerCompletedEventHandler(bgwNacitaniJevu_RunWorkerCompleted);
+        //     Mouse.OverrideCursor = Cursors.Wait;
+        //     NacitaniObsahu np = new NacitaniObsahu(StatisticFile, xa.Value);
+        //     mbgwNacitaniJevu.RunWorkerAsync(np);
+        // }
 
         void bgwNacitaniJevu_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Projects\Brus" t="IncludeFlat">
+      <e p="Brus.sln" t="IncludeFlat" />
+      <e p="Core" t="Include" />
+      <e p="Daliboris.Statistiky.Core" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Daliboris.Statistiky.Core.csproj" t="IncludeRecursive" />
+        <e p="Data" t="Include">
+          <e p="jevy.xsd" t="Include" />
+          <e p="pjv.txt" t="Include" />
+        </e>
+        <e p="Interfaces" t="Include">
+          <e p="IJev.cs" t="Include" />
+          <e p="IJevy.cs" t="Include" />
+          <e p="IJevyZdroje.cs" t="Include" />
+          <e p="ITextovyJev.cs" t="Include" />
+          <e p="IZdroj.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="Jevy" t="Include">
+            <e p="Tools" t="Include">
+              <e p="ReversibleSortedList.cs" t="Include" />
+              <e p="SqlPropertyDescriptor.cs" t="Include" />
+              <e p="TypedCollectionAttribute.cs" t="Include" />
+            </e>
+            <e p="XML" t="Include">
+              <e p="Jev.cs" t="Include" />
+              <e p="jevy.cs" t="Include" />
+              <e p="Prehledy.cs" t="Include" />
+              <e p="RazeniJevu.cs" t="Include" />
+              <e p="SkupinaJevu.cs" t="Include" />
+              <e p="Zdroj.cs" t="Include" />
+            </e>
+            <e p="Xsd" t="Include">
+              <e p="Detail.cs" t="Include" />
+              <e p="detaily.cs" t="Include" />
+              <e p="Enums" t="Include">
+                <e p="TypJevu.cs" t="Include" />
+              </e>
+              <e p="JazykovyJev.cs" t="Include" />
+              <e p="JazykovéJevy.cs" t="Include" />
+              <e p="lokace.cs" t="Include" />
+              <e p="LokaceVyskytu.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Statistiky" t="Include">
+            <e p="AdresarovaStruktura.cs" t="Include" />
+            <e p="FormatUlozeniSeznamu.cs" t="Include" />
+            <e p="JmenneProstory.cs" t="Include" />
+            <e p="MetadataBalicku.cs" t="Include" />
+            <e p="MetadataOJevu.cs" t="Include" />
+            <e p="Pocty.cs" t="Include" />
+            <e p="Relace.cs" t="Include" />
+            <e p="VlastnostiBalicku.cs" t="Include" />
+            <e p="ZnackyXml.cs" t="Include" />
+          </e>
+          <e p="Úkazy" t="Include">
+            <e p="SerializaceXml.cs" t="Include" />
+            <e p="Ukaz.cs" t="Include" />
+            <e p="UkazComparer.cs" t="Include" />
+            <e p="UkazFilter.cs" t="Include" />
+            <e p="Ukazy.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Daliboris.Statistiky.Core.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services" t="Include">
+          <e p="JevyService.cs" t="Include" />
+          <e p="SavingTools.cs" t="Include" />
+          <e p="StatisticsService.cs" t="Include" />
+        </e>
+        <e p="Tools" t="Include" />
+      </e>
+      <e p="Daliboris.Statistiky.UI.WPF" t="IncludeRecursive">
+        <e p="App.xaml" t="Include" />
+        <e p="App.xaml.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controls" t="Include">
+          <e p="FileSelector.xaml" t="Include" />
+          <e p="FileSelector.xaml.cs" t="Include" />
+          <e p="HiglightableTextBlock.cs" t="Include" />
+          <e p="NacitaniObsahu.cs" t="Include" />
+          <e p="PrehledyStatistik.xaml" t="Include" />
+          <e p="PrehledyStatistik.xaml.cs" t="Include" />
+          <e p="ZpracovaniSouboru.xaml" t="Include" />
+          <e p="ZpracovaniSouboru.xaml.cs" t="Include" />
+        </e>
+        <e p="Converters" t="Include">
+          <e p="BooleanToHiddenVisibility.cs" t="Include" />
+          <e p="Character2Kod.cs" t="Include" />
+          <e p="String2Int32.cs" t="Include" />
+        </e>
+        <e p="Daliboris.Statistiky.UI.WPF.csproj" t="IncludeRecursive" />
+        <e p="Images" t="Include">
+          <e p="1532_Flag_system_red.png" t="Include" />
+          <e p="Browse.png" t="Include" />
+          <e p="Brus.png" t="Include" />
+          <e p="Editovat_soubor.png" t="Include" />
+          <e p="FindHS.png" t="Include" />
+          <e p="Info.png" t="Include" />
+          <e p="LargeIcon.png" t="Include" />
+          <e p="Novy_prehled_32x32.png" t="Include" />
+          <e p="Otevrit_souboru_32x32.png" t="Include" />
+          <e p="Question.png" t="Include" />
+          <e p="SmallIcon.png" t="Include" />
+        </e>
+        <e p="MainWindow.xaml" t="Include" />
+        <e p="MainWindow.xaml.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="App.g.cs" t="Include" />
+            <e p="Controls" t="Include">
+              <e p="FileSelector.g.cs" t="Include" />
+              <e p="PrehledyStatistik.g.cs" t="Include" />
+              <e p="ZpracovaniSouboru.g.cs" t="Include" />
+            </e>
+            <e p="GeneratedInternalTypeHelper.g.cs" t="Include" />
+            <e p="MainWindow.g.cs" t="Include" />
+          </e>
+        </e>
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="Annotations.cs" t="Include" />
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="ViewModels" t="Include">
+          <e p="BaseViewModel.cs" t="Include" />
+          <e p="MainWindowViewModel.cs" t="Include" />
+          <e p="ZpracovaniSouboruViewModel.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Daliboris.Word" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Daliboris.Word.csproj" t="IncludeRecursive" />
+        <e p="DocxRotor.cd" t="Include" />
+        <e p="IRotor.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Usek.cs" t="Include" />
+        <e p="UsekZnakovehoStylu.cs" t="Include" />
+        <e p="WordService.cs" t="Include" />
+        <e p="WordSettings.cs" t="Include" />
+      </e>
+      <e p="Daliboris.Word.Core" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Daliboris.OOXML.Word" t="Include">
+          <e p="CleaningResult.cs" t="Include" />
+          <e p="DocxCleaner.cs" t="Include" />
+          <e p="DocxCleanerSettings.cs" t="Include" />
+          <e p="DocxReader.cs" t="Include" />
+          <e p="DocxReaderSettings.cs" t="Include" />
+          <e p="HyperlinkInfo.cs" t="Include" />
+          <e p="IRunFormatting.cs" t="Include" />
+          <e p="Pomucky.cs" t="Include" />
+          <e p="RunFormatting.cs" t="Include" />
+          <e p="RunObject.cs" t="Include" />
+          <e p="Structures.cs" t="Include" />
+          <e p="Style.cs" t="Include" />
+          <e p="Styles.cs" t="Include" />
+          <e p="StyleType.cs" t="Include" />
+        </e>
+        <e p="Daliboris.Word.Core.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Udalosti" t="Include">
+          <e p="BodyEventArgs.cs" t="Include" />
+          <e p="FontEventArgs.cs" t="Include" />
+          <e p="FootnoteEventArgs.cs" t="Include" />
+          <e p="ParagraphEventArgs.cs" t="Include" />
+          <e p="PictureEventArgs.cs" t="Include" />
+          <e p="PrimeFormatovaniEventArgs.cs" t="Include" />
+          <e p="ProgressEventArgs.cs" t="Include" />
+          <e p="SectionEventArgs.cs" t="Include" />
+          <e p="TableCellEventArgs.cs" t="Include" />
+          <e p="TableEventArgs.cs" t="Include" />
+          <e p="TableRowEventArgs.cs" t="Include" />
+          <e p="TextRunEventArgs.cs" t="Include" />
+        </e>
+        <e p="Xsd" t="Include">
+          <e p="WDoc2Xml.xsd" t="Include" />
+        </e>
+      </e>
+      <e p="Daliboris.Word.Pomucky.Xml" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Daliboris.Word.Pomucky.Xml.csproj" t="IncludeRecursive" />
+        <e p="DocumentSpace.cs" t="Include" />
+        <e p="Node.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net48" t="Include">
+              <e p="Daliboris.Word.Pomucky.Xml.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Objekty.cs" t="Include" />
+        <e p="Porovnani.cs" t="Include" />
+        <e p="SerializaceTools.cs" t="Include" />
+        <e p="Space.cs" t="Include" />
+        <e p="SpaceHandling.cs" t="Include" />
+        <e p="Transformace.cs" t="Include" />
+        <e p="Transformace.PresunMezeryVneTagu.cs" t="Include" />
+        <e p="Transformace_x.cs" t="Include" />
+        <e p="VyclenenaMezera.cs" t="Include" />
+      </e>
+      <e p="External\TreeView\Ricciolo.Controls.TreeListView.dll" t="Include" />
+      <e p="External\TreeView\Ricciolo.Controls.TreeListView.pdb" t="Include" />
+      <e p="Externals" t="Include" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Tests" t="Include">
+        <e p="AdamM.docx" t="Include" />
+        <e p="AdamM.pjv" t="Include" />
+      </e>
+      <e p="Text" t="IncludeRecursive">
+        <e p="AssemblyInfo.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Daliboris.Word.Text.csproj" t="IncludeRecursive" />
+        <e p="Digram.cs" t="Include" />
+        <e p="Grafem.cs" t="Include" />
+        <e p="IGram.cs" t="Include" />
+        <e p="IPocitatelny.cs" t="Include" />
+        <e p="IShoda.cs" t="Include" />
+        <e p="NGram.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="PorovnavacTextu.cs" t="Include" />
+        <e p="Retezec.cs" t="Include" />
+        <e p="Shoda.cs" t="Include" />
+        <e p="Slova.cs" t="Include" />
+        <e p="Slova.Nastaveni.cs" t="Include" />
+        <e p="Slovo.cs" t="Include" />
+        <e p="Soubor.cs" t="Include" />
+        <e p="Sprezka.cs" t="Include" />
+        <e p="Trigram.cs" t="Include" />
+        <e p="TypografickyPrvek.cs" t="Include" />
+        <e p="WordNGram.cs" t="Include" />
+        <e p="Zkratky.cs" t="Include" />
+        <e p="Znak.cs" t="Include" />
+        <e p="ZpusobRazeni.cs" t="Include" />
+      </e>
+      <e p="Tools" t="Include" />
+    </e>
+    <e p="C:\Users\madrvojt\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\madrvojt\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Brus.2132534291.00" t="ExcludeRecursive" />
+  </component>
+</project>

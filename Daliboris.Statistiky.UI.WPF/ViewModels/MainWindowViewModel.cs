@@ -15,9 +15,28 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
         private bool _isSaving = false;
         private bool _isZpracovaníOtevreno = false;
         private SkupinaJevu _skupinaJevu;
-
         private WordSettings _wordParserSettings;
-
+        private XmlDocument _data; 
+        
+        public XmlDocument Data
+        {
+            get
+            {
+                return _data;
+            }
+            set
+            {
+                if (value != _data)
+                {
+                    _data = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        
+        
+        
+        
         public MainWindowsViewModel()
         {
             OpenFileCommand = new ActionCommand(OpenFile);
@@ -77,7 +96,7 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
                 //statisticsService.VystupniSoubor = saveFileDialog.FileName;
                 //statisticsService.SloucitDetaily = false;
                 StatisticsService.OdstranitTecku = _wordParserSettings.OdstranitTeckuUSlov;
-                // StatisticsService.UlozStatistiky(_skupinaJevu, saveFileDialog.FileName, FormatUlozeniSeznamu.Text);
+                StatisticsService.UlozStatistiky(_skupinaJevu, saveFileDialog.FileName, FormatUlozeniSeznamu.Text);
             }
         }
 
@@ -96,6 +115,23 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
             var dxr = new WordService(filepath, wordParserSettings);
             var skupinaJevu = dxr.ZpracujDocx();
             _skupinaJevu = skupinaJevu;
+            
+            var statisticsService = new StatisticsService(); 
+            statisticsService.SkupinaJevu = _skupinaJevu;
+            // statisticsService.VystupniSoubor = 
+            //statisticsService.SloucitDetaily = false;
+            
+            var tempPath = Path.GetTempPath();
+            var filename = Guid.NewGuid().ToString();
+            var extension = ".pjv";
+            string fullPath = Path.Combine(tempPath, filename, extension);
+            
+            StatisticsService.UlozStatistiky(_skupinaJevu,fullPath , FormatUlozeniSeznamu.Text);
+            LoadPjvParser(fullPath);
+            
+            File.SetAttributes(fullPath, FileAttributes.Normal);
+            File.Delete(fullPath);
+
             //                 //dxr.UlozPrehledy();
             //                 
         }
@@ -109,7 +145,7 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
             if (File.Exists(filepath))
             {
                 // xd = StatisticsService.NactiDataStatistiky(sSoubor);
-                var skupinajevu = StatisticsService.NactiStatistiky(filepath);
+                Data = StatisticsService.NactiDataStatistiky(filepath);
             }
         }
 
@@ -147,11 +183,6 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
                 {
                     throw new Exception();
                 }
-
-
-                // Open document
-                var filename = fileDialog.FileName;
-                // PsPrehledy.SouborStatistik = filename;
             }
         }
     }

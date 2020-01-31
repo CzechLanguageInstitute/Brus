@@ -19,6 +19,10 @@
         <sys:String x:Key="sInt">int</sys:String>
         <sys:String x:Key="sHex">hex</sys:String>
         <sys:String x:Key="sKategorie">kategorie</sys:String>
+        
+        
+        
+        
         <DataTemplate x:Key="dtPocty">
             <!--
 			<TextBlock FontFamily="Palatino Linotype" Typography.Fraction="Stacked">
@@ -69,116 +73,117 @@
         </DataTemplate>
 
 
-        <Style TargetType="{x:Type DataGrid}">
-            <Setter Property="FontFamily" Value="Times New Roman" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="AlternationCount" Value="0" />
-            <Setter Property="AutoGenerateColumns" Value="False" />
-            <Setter Property="AlternatingRowBackground" Value="BlanchedAlmond" />
-            <!--<Setter Property="VerticalContentAlignment" Value="Stretch"/>-->
-            <Setter Property="VerticalContentAlignment" Value="Top" />
-        </Style>
-        <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
-            <Setter Property="Width" Value="8" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Cursor" Value="SizeWE" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <!-- <Style TargetType="{x:Type DataGrid}"> -->
+        <!--     <Setter Property="FontFamily" Value="Times New Roman" /> -->
+        <!--     <Setter Property="FontSize" Value="14" /> -->
+        <!--     <Setter Property="AlternationCount" Value="0" /> -->
+        <!--     <Setter Property="AutoGenerateColumns" Value="False" /> -->
+        <!--     <Setter Property="AlternatingRowBackground" Value="BlanchedAlmond" /> -->
+        <!--     ~1~<Setter Property="VerticalContentAlignment" Value="Stretch"/>@1@ -->
+        <!--     <Setter Property="VerticalContentAlignment" Value="Top" /> -->
+        <!-- </Style> -->
+        <!-- <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}"> -->
+        <!--     <Setter Property="Width" Value="8" /> -->
+        <!--     <Setter Property="Background" Value="Transparent" /> -->
+        <!--     <Setter Property="Cursor" Value="SizeWE" /> -->
+        <!--     <Setter Property="Template"> -->
+        <!--         <Setter.Value> -->
+        <!--             <ControlTemplate TargetType="{x:Type Thumb}"> -->
+        <!--                 <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" /> -->
+        <!--             </ControlTemplate> -->
+        <!--         </Setter.Value> -->
+        <!--     </Setter> -->
+        <!-- </Style> -->
 
-        <Style x:Key="ColumnHeaderLeftGripperStyle" BasedOn="{StaticResource ColumnHeaderGripperStyle}"
-               TargetType="{x:Type Thumb}">
-            <Setter Property="Width" Value="8" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Cursor" Value="SizeWE" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
-                                x:Name="Border">
-                            <!--<Canvas>
-								<Line RenderOptions.EdgeMode="Aliased" X1="7" Y1="{Binding ElementName=Border, Path=ActualHeight}"
-									  X2="7" Y2="0" Stroke="DarkGray"/>
-							</Canvas>-->
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="Hlavicka" TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <!--<Setter Property="Background" Value="Pink" />-->
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                        <Grid>
-
-                            <th:DataGridHeaderBorder SortDirection="{TemplateBinding SortDirection}"
-                                                     IsHovered="{TemplateBinding IsMouseOver}"
-                                                     IsPressed="{TemplateBinding IsPressed}"
-                                                     IsClickable="{TemplateBinding CanUserSort}"
-                                                     Background="{TemplateBinding Background}"
-                                                     BorderBrush="{TemplateBinding BorderBrush}"
-                                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                                     Padding="{TemplateBinding Padding}"
-                                                     SeparatorVisibility="{TemplateBinding SeparatorVisibility}"
-                                                     SeparatorBrush="{TemplateBinding SeparatorBrush}">
-                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
-                            </th:DataGridHeaderBorder>
-
-
-                            <Thumb x:Name="PART_LeftHeaderGripper"
-                                   HorizontalAlignment="Left"
-                                   Style="{StaticResource ColumnHeaderGripperStyle}" />
-                            <Thumb x:Name="PART_RightHeaderGripper"
-                                   HorizontalAlignment="Right"
-                                   Style="{StaticResource ColumnHeaderLeftGripperStyle}" />
-                            <Path x:Name="UpArrow" Fill="Black" HorizontalAlignment="Right"
-                                  VerticalAlignment="Center"
-                                  Margin="0,0,7,0" Visibility="Hidden" Data="M0,0 L6,0 L3,5 L0,0" />
-                            <Path x:Name="DownArrow" Fill="Black" HorizontalAlignment="Right"
-                                  VerticalAlignment="Center" Margin="0,0,7,0"
-                                  Visibility="Hidden" Data="M0,5 L6,5 L3,0 L0,5" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="SortDirection" Value="Descending">
-                                <Setter TargetName="UpArrow"
-                                        Property="Visibility" Value="Hidden" />
-                                <Setter TargetName="DownArrow"
-                                        Property="Visibility" Value="Visible" />
-                            </Trigger>
-                            <Trigger Property="SortDirection" Value="Ascending">
-                                <Setter TargetName="DownArrow"
-                                        Property="Visibility" Value="Hidden" />
-                                <Setter TargetName="UpArrow"
-                                        Property="Visibility" Value="Visible" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-        </Style>
-        <Style BasedOn="{StaticResource Hlavicka}" x:Key="Nadpis" TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Foreground" Value="Green" />
-            <Setter Property="Background" Value="Gold" />
-            <Setter Property="Padding" Value="3" />
-        </Style>
-        <Style BasedOn="{StaticResource Hlavicka}" x:Key="Popiska" TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Foreground" Value="Green" />
-            <Setter Property="Background" Value="Gold" />
-            <Setter Property="Padding" Value="3" />
-        </Style>
+       <!--  <Style x:Key="ColumnHeaderLeftGripperStyle" BasedOn="{StaticResource ColumnHeaderGripperStyle}" -->
+       <!--         TargetType="{x:Type Thumb}"> -->
+       <!--      <Setter Property="Width" Value="8" /> -->
+       <!--      <Setter Property="Background" Value="Transparent" /> -->
+       <!--      <Setter Property="Cursor" Value="SizeWE" /> -->
+       <!--      <Setter Property="Template"> -->
+       <!--          <Setter.Value> -->
+       <!--              <ControlTemplate TargetType="{x:Type Thumb}"> -->
+       <!--                  <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" -->
+       <!--                          x:Name="Border"> -->
+                            <!--<Canvas> -->
+							<!-- 	<Line RenderOptions.EdgeMode="Aliased" X1="7" Y1="{Binding ElementName=Border, Path=ActualHeight}" -->
+							<!-- 		  X2="7" Y2="0" Stroke="DarkGray"/> -->
+							<!-- </Canvas>--> 
+       <!--                  </Border> -->
+       <!--              </ControlTemplate> -->
+       <!--          </Setter.Value> -->
+       <!--      </Setter> -->
+       <!--  </Style> -->
+        
+        <!-- <Style x:Key="Hlavicka" TargetType="{x:Type DataGridColumnHeader}"> -->
+        <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
+        <!--     ~1~<Setter Property="Background" Value="Pink" />@1@ -->
+        <!-- -->
+        <!--     <Setter Property="Template"> -->
+        <!--         <Setter.Value> -->
+        <!--             <ControlTemplate TargetType="{x:Type DataGridColumnHeader}"> -->
+        <!--                 <Grid> -->
+        <!-- -->
+        <!--                     <th:DataGridHeaderBorder SortDirection="{TemplateBinding SortDirection}" -->
+        <!--                                              IsHovered="{TemplateBinding IsMouseOver}" -->
+        <!--                                              IsPressed="{TemplateBinding IsPressed}" -->
+        <!--                                              IsClickable="{TemplateBinding CanUserSort}" -->
+        <!--                                              Background="{TemplateBinding Background}" -->
+        <!--                                              BorderBrush="{TemplateBinding BorderBrush}" -->
+        <!--                                              BorderThickness="{TemplateBinding BorderThickness}" -->
+        <!--                                              Padding="{TemplateBinding Padding}" -->
+        <!--                                              SeparatorVisibility="{TemplateBinding SeparatorVisibility}" -->
+        <!--                                              SeparatorBrush="{TemplateBinding SeparatorBrush}"> -->
+        <!--                         <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" -->
+        <!--                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
+        <!--                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" /> -->
+        <!--                     </th:DataGridHeaderBorder> -->
+        <!-- -->
+        <!-- -->
+        <!--                     <Thumb x:Name="PART_LeftHeaderGripper" -->
+        <!--                            HorizontalAlignment="Left" -->
+        <!--                            Style="{StaticResource ColumnHeaderGripperStyle}" /> -->
+        <!--                     <Thumb x:Name="PART_RightHeaderGripper" -->
+        <!--                            HorizontalAlignment="Right" -->
+        <!--                            Style="{StaticResource ColumnHeaderLeftGripperStyle}" /> -->
+        <!--                     <Path x:Name="UpArrow" Fill="Black" HorizontalAlignment="Right" -->
+        <!--                           VerticalAlignment="Center" -->
+        <!--                           Margin="0,0,7,0" Visibility="Hidden" Data="M0,0 L6,0 L3,5 L0,0" /> -->
+        <!--                     <Path x:Name="DownArrow" Fill="Black" HorizontalAlignment="Right" -->
+        <!--                           VerticalAlignment="Center" Margin="0,0,7,0" -->
+        <!--                           Visibility="Hidden" Data="M0,5 L6,5 L3,0 L0,5" /> -->
+        <!--                 </Grid> -->
+        <!--                 <ControlTemplate.Triggers> -->
+        <!--                     <Trigger Property="SortDirection" Value="Descending"> -->
+        <!--                         <Setter TargetName="UpArrow" -->
+        <!--                                 Property="Visibility" Value="Hidden" /> -->
+        <!--                         <Setter TargetName="DownArrow" -->
+        <!--                                 Property="Visibility" Value="Visible" /> -->
+        <!--                     </Trigger> -->
+        <!--                     <Trigger Property="SortDirection" Value="Ascending"> -->
+        <!--                         <Setter TargetName="DownArrow" -->
+        <!--                                 Property="Visibility" Value="Hidden" /> -->
+        <!--                         <Setter TargetName="UpArrow" -->
+        <!--                                 Property="Visibility" Value="Visible" /> -->
+        <!--                     </Trigger> -->
+        <!--                 </ControlTemplate.Triggers> -->
+        <!--             </ControlTemplate> -->
+        <!--         </Setter.Value> -->
+        <!--     </Setter> -->
+        <!-- -->
+        <!-- </Style> -->
+        <!-- <Style BasedOn="{StaticResource Hlavicka}" x:Key="Nadpis" TargetType="{x:Type DataGridColumnHeader}"> -->
+        <!--     <Setter Property="FontSize" Value="14" /> -->
+        <!--     <Setter Property="Foreground" Value="Green" /> -->
+        <!--     <Setter Property="Background" Value="Gold" /> -->
+        <!--     <Setter Property="Padding" Value="3" /> -->
+        <!-- </Style> -->
+        <!-- <Style BasedOn="{StaticResource Hlavicka}" x:Key="Popiska" TargetType="{x:Type DataGridColumnHeader}"> -->
+        <!--     <Setter Property="FontSize" Value="14" /> -->
+        <!--     <Setter Property="Foreground" Value="Green" /> -->
+        <!--     <Setter Property="Background" Value="Gold" /> -->
+        <!--     <Setter Property="Padding" Value="3" /> -->
+        <!-- </Style> -->
 
     </UserControl.Resources>
 
@@ -201,70 +206,54 @@
         </Grid.RowDefinitions>
         <!-- ItemsSource="{Binding Source={StaticResource data},XPath=/statistiky/statistika}" -->
 
-        
+
         <ScrollViewer x:Name="ScvPosunovacStatistiky" Grid.Column="0" VerticalScrollBarVisibility="Auto">
-             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                 <TreeView>
-                     
-                     
-                 </TreeView>
-                 
-                 
-                 
-             </StackPanel>
-        </ScrollViewer> 
-        
-        <!-- <ScrollViewer x:Name="ScvPosunovacStatistiky" Grid.Column="0" VerticalScrollBarVisibility="Auto"> -->
-        <!--     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left"> -->
-        <!--         <r:TreeListView x:Name="tlvStatistiky" ItemsSource="{Binding XPath=/statistiky/statistika}" -->
-        <!--                         ItemTemplate="{StaticResource dt}" Margin="0,0,0,0" -->
-        <!--                         SelectedItemChanged="tlvStatistiky_SelectedItemChanged" VerticalAlignment="Top"> -->
-        <!--             <r:TreeListView.Columns> -->
-        <!--                 <GridViewColumn Header="" CellTemplate="{StaticResource dtObsahPrvky}" Width="150" /> -->
-        <!--                 <GridViewColumn CellTemplate="{StaticResource dtObsahZnaky}" Width="60"> -->
-        <!--                     <GridViewColumnHeader> -->
-        <!--                         <StackPanel Orientation="Horizontal"> -->
-        <!--                             <TextBlock Text="Znaky" /> -->
-        <!--                             <CheckBox x:Name="chbZnaky" IsChecked="True" Margin="5,0,0,0" /> -->
-        <!--                         </StackPanel> -->
-        <!--                     </GridViewColumnHeader> -->
-        <!--                 </GridViewColumn> -->
-        <!--                 <GridViewColumn CellTemplate="{StaticResource dtObsahSlova}" Width="60"> -->
-        <!--                     <GridViewColumnHeader> -->
-        <!--                         <StackPanel Orientation="Horizontal"> -->
-        <!--                             <TextBlock Text="Slova" /> -->
-        <!--                             <CheckBox x:Name="chbSlova" IsChecked="True" Margin="5,0,0,0" /> -->
-        <!--                         </StackPanel> -->
-        <!--                     </GridViewColumnHeader> -->
-        <!--                 </GridViewColumn> -->
-        <!--                 <GridViewColumn CellTemplate="{StaticResource dtObsahUseky}" Width="60"> -->
-        <!--                     <GridViewColumnHeader> -->
-        <!--                         <StackPanel Orientation="Horizontal"> -->
-        <!--                             <TextBlock Text="Úseky" /> -->
-        <!--                             <CheckBox x:Name="chbUseky" IsChecked="True" Margin="5,0,0,0" /> -->
-        <!--                         </StackPanel> -->
-        <!--                     </GridViewColumnHeader> -->
-        <!--                 </GridViewColumn> -->
-        <!--                 <GridViewColumn CellTemplate="{StaticResource dtObsahDigramy}" Width="70"> -->
-        <!--                     <GridViewColumnHeader> -->
-        <!--                         <StackPanel Orientation="Horizontal"> -->
-        <!--                             <TextBlock Text="Digramy" /> -->
-        <!--                             <CheckBox x:Name="chbDigramy" IsChecked="True" Margin="5,0,0,0" /> -->
-        <!--                         </StackPanel> -->
-        <!--                     </GridViewColumnHeader> -->
-        <!--                 </GridViewColumn> -->
-        <!--                 <GridViewColumn CellTemplate="{StaticResource dtObsahTrigramy}" Width="70"> -->
-        <!--                     <GridViewColumnHeader> -->
-        <!--                         <StackPanel Orientation="Horizontal"> -->
-        <!--                             <TextBlock Text="Trigramy" /> -->
-        <!--                             <CheckBox x:Name="chbTrigramy" IsChecked="True" Margin="5,0,0,0" /> -->
-        <!--                         </StackPanel> -->
-        <!--                     </GridViewColumnHeader> -->
-        <!--                 </GridViewColumn> -->
-        <!--             </r:TreeListView.Columns> -->
-        <!--         </r:TreeListView> -->
-        <!--     </StackPanel> -->
-        <!-- </ScrollViewer> -->
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                <r:TreeListView x:Name="tlvStatistiky"
+                                ItemsSource="{Binding XPath=/statistiky/statistika}"
+                                ItemTemplate="{StaticResource dt}" Margin="0,0,0,0"
+                                VerticalAlignment="Top">
+                    <r:TreeListView.Columns>
+                        <GridViewColumn Header="" CellTemplate="{StaticResource dtObsahPrvky}" Width="300" />
+                        <GridViewColumn CellTemplate="{StaticResource dtObsahZnaky}" Width="60">
+                            <GridViewColumnHeader>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Znaky" />
+                                </StackPanel>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn CellTemplate="{StaticResource dtObsahSlova}" Width="60">
+                            <GridViewColumnHeader>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Slova" />
+                                </StackPanel>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn CellTemplate="{StaticResource dtObsahUseky}" Width="60">
+                            <GridViewColumnHeader>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Úseky" />
+                                </StackPanel>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn CellTemplate="{StaticResource dtObsahDigramy}" Width="70">
+                            <GridViewColumnHeader>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Digramy" />
+                                </StackPanel>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn CellTemplate="{StaticResource dtObsahTrigramy}" Width="70">
+                            <GridViewColumnHeader>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Trigramy" />
+                                </StackPanel>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                    </r:TreeListView.Columns>
+                </r:TreeListView>
+            </StackPanel>
+        </ScrollViewer>
 
 
         <!-- <DataGrid x:Name="dtgZnaky" Grid.Column="1" Grid.Row="0" -->

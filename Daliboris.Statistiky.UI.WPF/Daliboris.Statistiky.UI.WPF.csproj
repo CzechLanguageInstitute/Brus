@@ -119,7 +119,7 @@
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="Ricciolo.Controls.TreeListView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ffedd4b1334b06f5">
-      <HintPath>..\External\TreeView\Ricciolo.Controls.TreeListView.dll</HintPath>
+      <HintPath>..\..\..\Users\madrvojt\Documents\GitHub\Brus\External\TreeView\Ricciolo.Controls.TreeListView.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

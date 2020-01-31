@@ -18,14 +18,7 @@
         </Grid.RowDefinitions>
 
         <fluent:Ribbon x:Name="rbnPasKaret">
-            <!--<ribbon:Ribbon.ApplicationMenu>
-				<ribbon:RibbonApplicationMenu SmallImageSource="Images\Brus.png">
-					<ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon"
-													  x:Name="MenuItem1"
-													  ImageSource="Images\Brus.png"/>
-				</ribbon:RibbonApplicationMenu>
-			</ribbon:Ribbon.ApplicationMenu>-->
-            <fluent:RibbonTabItem x:Name="TabPrehledy" Header="Prohlížení">
+	        <fluent:RibbonTabItem x:Name="TabPrehledy" Header="Prohlížení">
                 <fluent:RibbonGroupBox x:Name="GrpSoubor" Header="Soubor">
                     <fluent:Button LargeIcon="Images\Otevrit_souboru_32x32.png" Header="Otevřít" Command="{Binding OpenFileCommand}"
                                    />
@@ -51,48 +44,8 @@
 		            <fluent:Button LargeIcon="Images\Question.png" Header="Nápověda" />
 		            <fluent:Button LargeIcon="Images\Info.png" Header="O aplikaci"/>
 	            </fluent:RibbonGroupBox>
-
-                <!--
-				<StackPanel Orientation="Horizontal">
-						<r:RibbonTextBox x:Name="TxtHledanyText" Text="" />
-						<r:RibbonButton x:Name="BtnHledat" Label="" SmallImageSource="Images\FindHS.png" Click="BtnHledat_Click" Margin="5,0,0,0" />
-					</StackPanel>
-				<r:RibbonGroup x:Name="GrpFormat" Header="Formát">
-					<r:RibbonComboBox x:Name="CmbVelikostTextu" Label="velikost" IsEditable="True" >
-						<r:RibbonGallery x:Name="RbgVelikostTextu" SelectedValue="14" SelectedValuePath="Content" MaxColumnCount="1">
-							<r:RibbonGalleryCategory>
-								<r:RibbonGalleryItem Content="10"  />
-								<r:RibbonGalleryItem Content="12" />
-								<r:RibbonGalleryItem Content="14" />
-								<r:RibbonGalleryItem Content="16" />
-								<r:RibbonGalleryItem Content="18" />
-								<r:RibbonGalleryItem Content="20" />
-								<r:RibbonGalleryItem Content="22" />
-							</r:RibbonGalleryCategory>
-						</r:RibbonGallery>
-
-					</r:RibbonComboBox>
-				</r:RibbonGroup>
-				<r:RibbonGroup x:Name="GrpExport" Header="Export" ></r:RibbonGroup>
-			</r:RibbonTab>
-			<r:RibbonTab x:Name="TabStatistiky" Header="Statistiky">
-				<r:RibbonGroup x:Name="RbgTabStatistikySoubor" Header="Soubor">
-					<r:RibbonButton x:Name="BtnVytvorit" LargeImageSource="Images\Novy_prehled_32x32.png"
-													Label="Vytvořit" Click="BtnTabPrehledyVytvorit_Click"  />
-				</r:RibbonGroup>
-			</r:RibbonTab>
-			<r:RibbonTab x:Name="RbtValidace" Header="Validace">
-                <r:RibbonGroup x:Name="RbgTabValidaceSprava" Header="Správa">
-                    <r:RibbonButton x:Name="BtnVaidovatAplikovat" LargeImageSource="Images\1532_Flag_system_red.png" Label="Vytvořit" Click="BtnVaidovatAplikovat_Click"  />
-                </r:RibbonGroup>
--->
             </fluent:RibbonTabItem>
         </fluent:Ribbon>
-        <!-- <controls:PrehledyStatistik Grid.Row="1" x:Name="PsPrehledy" StatisticFile="{Binding FileName}" -->
-        <!--                        FiltrovatAutomaticky="{Binding ElementName=ChbFiltrovatAutomaticky, Path=IsChecked, Mode=TwoWay}" -->
-        <!--                        RozlisovatVelikostPismen="{Binding ElementName= -->
-        <!--                        ChbRozlisovatVelikostPismen, Path=IsChecked, Mode=TwoWay}" -->
-        <!--                        HledanyText="{Binding ElementName=TxtHledanyText, Path=Text, Mode=TwoWay}" -->
-        <!--                        VelikostTextu="{Binding ElementName=RbgVelikostTextu, Path=SelectedValue, Mode=TwoWay}" /> -->
+        <controls:PrehledyStatistik Grid.Row="1" DataContext="{Binding Data}" /> 
     </Grid>
 </fluent:RibbonWindow>
