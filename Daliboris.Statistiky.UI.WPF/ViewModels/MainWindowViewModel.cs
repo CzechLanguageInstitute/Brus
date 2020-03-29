@@ -214,7 +214,7 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
                 File.SetAttributes(fullPath, FileAttributes.Normal);
                 File.Delete(fullPath); 
             }
-            
+            StatisticsService.OdstranitTecku = _wordParserSettings.OdstranitTeckuUSlov;
             StatisticsService.UlozStatistiky(_skupinaJevu,fullPath , FormatUlozeniSeznamu.Text);
             LoadPjvParser(fullPath);
             
