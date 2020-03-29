@@ -47,6 +47,8 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
 
         public ICommand VelikostTextuCommand { get; set; }
 
+        public ICommand FilterTextCommand { get; set; }
+        
         
         // Path to actual load file
         
@@ -86,10 +88,16 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
             FilterTrigramyCommand = new ActionCommand(new Action<object>(FilterTrigramy));
             RozlisovatVelikostPismenCommand = new ActionCommand(new Action<object>(RozlisovatVelikostPismen));
             VelikostTextuCommand = new ActionCommand(new Action<object>(ZmenaVelikostiTextu)); 
+            FilterTextCommand = new ActionCommand(new Action<object>(FilterText));
             _prehledyStatistikUserControl = prehledyStatistikUserControl;
         }
 
 
+        private void FilterText(object text)
+        { 
+            ((PrehledyStatistikViewModel) _prehledyStatistikUserControl?.DataContext)?.TextFilter((string)text);
+
+        }
 
         private void ZmenaVelikostiTextu(object velikostTextu)
         {

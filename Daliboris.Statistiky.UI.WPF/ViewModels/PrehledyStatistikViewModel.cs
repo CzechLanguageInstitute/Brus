@@ -189,6 +189,12 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
             
         }
         
+        public void TextFilter(string text)
+        {
+            _prehledyStatistik.FiltrujText(text);
+            
+        }
+        
         public void NastavitVelikostTextu(double velikost)
         {
             _prehledyStatistik.NastavitVelikostTextu(velikost);

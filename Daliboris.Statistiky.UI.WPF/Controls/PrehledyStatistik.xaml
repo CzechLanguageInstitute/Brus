@@ -561,11 +561,12 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- ItemsSource="{Binding Source={StaticResource data},XPath=/statistiky/statistika}" -->
 
 
-        <ScrollViewer x:Name="ScvPosunovacStatistiky" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="ScvPosunovacStatistiky" Grid.RowSpan="2" Grid.Column="0" VerticalScrollBarVisibility="Auto">
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
                 <treeListView:TreeListView x:Name="tlvStatistiky"
                                            DataContext="{Binding Data}"
@@ -624,7 +625,7 @@
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"
                   Visibility="{Binding IsZnakyVisible, Converter={StaticResource Bool2Visibility}}"
-                  Tag="1" SelectionChanged="Dtg_SelectionChanged">
+                  Tag="1" SelectionChanged="Dtg_SelectionChanged" LoadingRowDetails="DtgZnaky_OnLoadingRowDetails">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Znaky" Width="Auto" MaxWidth="400" SortMemberPath="Nazev"
                                     HeaderStyle="{StaticResource Nadpis}" Binding="{Binding Nazev}" />
@@ -648,6 +649,7 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
+        <!-- Slova -->
         <DataGrid x:Name="dtgSlova" Grid.Column="2" Grid.Row="0"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"
@@ -722,7 +724,12 @@
                                     HeaderStyle="{StaticResource Popiska}" />
             </DataGrid.Columns>
         </DataGrid>
-
+        
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5">
+            <TextBox x:Name="tbxNadpis"></TextBox>
+            <TextBox x:Name="tbxPodnadpis1"></TextBox>
+            <TextBox x:Name="tbxPodnadpis2"></TextBox>
+        </StackPanel>
 
     </Grid>
 </UserControl>

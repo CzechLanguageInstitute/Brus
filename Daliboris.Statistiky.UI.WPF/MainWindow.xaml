@@ -28,8 +28,8 @@
                 <fluent:RibbonGroupBox x:Name="GrpFiltrovani" Header="Filtrování">
                     <fluent:CheckBox x:Name="ChbFiltrovatAutomaticky" Header="filtrovat automaticky" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterAutomaticCommand}" />
                     <fluent:CheckBox x:Name="ChbRozlisovatVelikostPismen" Header="rozlišovat velikost písmen" IsChecked="True" CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding RozlisovatVelikostPismenCommand}" />
-               
-                    
+                    <fluent:TextBox x:Name="BtnFilterText" Header="Text pro filter"  />
+                    <fluent:Button x:Name="BtnHledat" LargeIcon="Images\FindHS.png" Icon="Images\FindHS.png" Command="{Binding FilterTextCommand}" CommandParameter="{Binding Text ,Source={x:Reference BtnFilterText}}" Margin="0,0,0,0" />
                 </fluent:RibbonGroupBox>
 	            <fluent:RibbonGroupBox x:Name="GrpZobrazeni" Header="Zobrazení">
 		            <fluent:CheckBox x:Name="ChbZnaky" Header="Znaky" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterZnakyCommand}" />

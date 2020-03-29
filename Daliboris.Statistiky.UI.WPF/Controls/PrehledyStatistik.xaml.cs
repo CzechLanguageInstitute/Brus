@@ -33,44 +33,7 @@ namespace Daliboris.Statistiky.UI.WPF.Controls
             DataContext = _viewModel;
             IdentifikujPromenne();
         }
-
-
-        //private bool mblnRozlisovatVelikostPismen;
-        //private bool mblnFiltrovatAutomaticky;
-        //private bool mblnSlovaZacinajiciMalymPismenem;
         
-        //
-        //     FrameworkPropertyMetadata mdht = new FrameworkPropertyMetadata(String.Empty, HledanyTextPropertyChanged);
-        //     HledanyTextProperty =
-        //         DependencyProperty.Register("HledanyText", typeof(string), typeof(PrehledyStatistik), mdht);
-
-
-        /*
-static void SouborStatistikChangedCallBack(DependencyObject property,
-    DependencyPropertyChangedEventArgs args) {
-    SearchTextBox searchTextBox = (SearchTextBox)property;
-    searchTextBox.textSearch.Text = (string)args.NewValue;
-}
-    
-
-        */
-
-        #region SouborStatistik dependency property
-
-        /// <summary>
-        /// A property wrapper for the <see cref="SouborStatistikProperty"/>
-        /// dependency property:<br/>
-        /// Description
-        /// </summary>
-        /// <summary>
-        /// Handles changes on the <see cref="SouborStatistikProperty"/> dependency property. As
-        /// WPF internally uses the dependency property system and bypasses the
-        /// <see cref="SouborStatistik"/> property wrapper, updates should be handled here.
-        /// </summary>
-        /// <param name="d">The currently processed owner of the property.</param>
-        /// <param name="e">Provides information about the updated property.</param>
-
-        #endregion
 
         public void ZrusitFiltry(bool isChecked)
         {
@@ -79,54 +42,7 @@ static void SouborStatistikChangedCallBack(DependencyObject property,
                 PriraditUsekyDataGridum();
             }
         }
-
         
-        #region HledanyText dependency property
-
-        /// <summary>
-        /// Hledaný text ve statistikách
-        /// </summary>
-        public static readonly DependencyProperty HledanyTextProperty;
-
-        //TODO: copy to static constructor
-        //register dependency property
-
-
-        /// <summary>
-        /// A property wrapper for the <see cref="HledanyTextProperty"/>
-        /// dependency property:<br/>
-        /// Hledaný text ve statistikách
-        /// </summary>
-        public string HledanyText
-        {
-            get { return (string) GetValue(HledanyTextProperty); }
-            set { SetValue(HledanyTextProperty, value); }
-        }
-
-
-        /// <summary>
-        /// Handles changes on the <see cref="HledanyTextProperty"/> dependency property. As
-        /// WPF internally uses the dependency property system and bypasses the
-        /// <see cref="HledanyText"/> property wrapper, updates should be handled here.
-        /// </summary>
-        /// <param name="d">The currently processed owner of the property.</param>
-        /// <param name="e">Provides information about the updated property.</param>
-        private static void HledanyTextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            PrehledyStatistik owner = (PrehledyStatistik) d;
-            string newValue = (string) e.NewValue;
-            //TODO provide implementation
-            //throw new NotImplementedException("Change event handler for dependency property HledanyText not implemented.");
-            // if (owner.FiltrovatAutomaticky)
-            // {
-            //     owner.NastavAktualniFiltr(newValue, owner.RozlisovatVelikostPismen);
-            //     owner.PriraditFiltryDataGridum(1);
-            // }
-        }
-
-        #endregion
-        
-
         private void IdentifikujPromenne()
         {
             mgdcTabulky = new Dictionary<string, DataGrid>(5);
@@ -264,9 +180,10 @@ static void SouborStatistikChangedCallBack(DependencyObject property,
                 }
         */
 
-        public void FiltrujText(string sText, bool? nullable)
+        public void FiltrujText(string sText)
         {
-            bool bRozlisovat = nullable.GetValueOrDefault(false);
+            ZrusFiltry();
+            bool bRozlisovat = _viewModel.IsRozlisovatVelikostPismen;
             NastavAktualniFiltr(sText, bRozlisovat);
             PriraditFiltryDataGridum(1);
         }
@@ -274,6 +191,48 @@ static void SouborStatistikChangedCallBack(DependencyObject property,
         public void ZrusFiltry()
         {
             ZrusitFiltry(false);
+        }
+
+        private void DtgZnaky_OnLoadingRowDetails(object sender, DataGridRowDetailsEventArgs e)
+        {
+
+            string text1 = "";
+            string text2 = "";
+            string text3 = "";
+
+            foreach (var child in ((StackPanel)e.DetailsElement).Children)
+            {
+                if (child.GetType() == typeof(TextBlock))
+                {
+                    text1 = ((TextBlock) child).Text;
+                }
+
+                if (child.GetType() == typeof(StackPanel))
+                {
+                    int i = 0;
+                    foreach (var stackChild in ((StackPanel) child).Children)
+                    {
+                        if (i == 0)
+                        {
+                            text2 = ((TextBlock) stackChild).Text;
+                        }
+                        else
+                        {
+                            text3 = ((TextBlock) stackChild).Text;
+                        }
+
+                        i++;
+                    }
+
+                }
+
+            }
+
+            tbxNadpis.Text = text1;
+            tbxPodnadpis1.Text = text2;
+            tbxPodnadpis2.Text = text3;
+            
+
         }
     }
 }
