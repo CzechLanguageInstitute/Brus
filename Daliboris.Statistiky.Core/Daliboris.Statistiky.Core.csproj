@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Data\jevy.xsd" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Daliboris.Word.Core\Daliboris.Word.Core.csproj" />
+      <ProjectReference Include="..\Daliboris.Word.Pomucky.Xml\Daliboris.Word.Pomucky.Xml.csproj" />
+      <ProjectReference Include="..\Daliboris.Word.Text\Daliboris.Word.Text.csproj" />
+    </ItemGroup>
+    
+
+    <ItemGroup>
+      <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+      <PackageReference Include="System.IO.Packaging" Version="4.7.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Tools" />
+    </ItemGroup>
+
+</Project>

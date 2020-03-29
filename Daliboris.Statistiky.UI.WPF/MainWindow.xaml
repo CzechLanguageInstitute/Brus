@@ -1,76 +1,64 @@
-﻿<r:RibbonWindow x:Class="Daliboris.Statistiky.UI.WPF.MainWindow"
-		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-		xmlns:p="clr-namespace:Daliboris.Statistiky.UI.WPF;assembly=Daliboris.Statistiky.UI.WPF.Prehledy"
-		Title="Přehled statistik"
-		x:Name="RibbonWindow"
-		Width="640" Height="480">
-
+﻿<fluent:RibbonWindow x:Class="Daliboris.Statistiky.UI.WPF.MainWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                     xmlns:wpf="clr-namespace:Daliboris.Statistiky.UI.WPF"
+                     xmlns:viewmodels="clr-namespace:Daliboris.Statistiky.UI.WPF.ViewModels"
+                     xmlns:fluent="urn:fluent-ribbon"
+                     xmlns:controls="clr-namespace:Daliboris.Statistiky.UI.WPF.Controls"
+                     Title="Přehled statistik"
+                     x:Name="RibbonWindow"
+                     Width="640" Height="480">
 	<Grid x:Name="LayoutRoot">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-		<r:Ribbon x:Name="rbnPasKaret" SelectionChanged="rbnPasKaret_SelectionChanged">
-			<!--<ribbon:Ribbon.ApplicationMenu>
-				<ribbon:RibbonApplicationMenu SmallImageSource="Images\Brus.png">
-					<ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon"
-													  x:Name="MenuItem1"
-													  ImageSource="Images\Brus.png"/>
-				</ribbon:RibbonApplicationMenu>
-			</ribbon:Ribbon.ApplicationMenu>-->
-			<r:RibbonTab x:Name="TabPrehledy" Header="Prohlížení">
-				<r:RibbonGroup x:Name="GrpSoubor" Header="Soubor">
-					<r:RibbonButton x:Name="BtnOtevrit" LargeImageSource="Images\Otevrit_souboru_32x32.png" Label="Otevřít" Click="BtnOtevrit_Click" />
-					<r:RibbonButton x:Name="BtnTabPrehledyVytvorit" LargeImageSource="Images\Novy_prehled_32x32.png" Label="Vytvořit" Click="BtnTabPrehledyVytvorit_Click" />
-				</r:RibbonGroup>
-				<r:RibbonGroup x:Name="GrpFiltrovani" Header="Filtrování">
-					<r:RibbonCheckBox x:Name="ChbFiltrovatAutomaticky" Label="filtrovat automaticky" IsChecked="True" />
-					<r:RibbonCheckBox x:Name="ChbRozlisovatVelikostPismen" Label="rozlišovat velikost písmen" IsChecked="True" />
-					<StackPanel Orientation="Horizontal">
-						<r:RibbonTextBox x:Name="TxtHledanyText" Text="" />
-						<r:RibbonButton x:Name="BtnHledat" Label="" SmallImageSource="Images\FindHS.png" Click="BtnHledat_Click" Margin="5,0,0,0" />
-					</StackPanel>
-				</r:RibbonGroup>
-				<r:RibbonGroup x:Name="GrpFormat" Header="Formát">
-					<r:RibbonComboBox x:Name="CmbVelikostTextu" Label="velikost" IsEditable="True" >
-						<r:RibbonGallery x:Name="RbgVelikostTextu" SelectedValue="14" SelectedValuePath="Content" MaxColumnCount="1">
-							<r:RibbonGalleryCategory>
-								<r:RibbonGalleryItem Content="10"  />
-								<r:RibbonGalleryItem Content="12" />
-								<r:RibbonGalleryItem Content="14" />
-								<r:RibbonGalleryItem Content="16" />
-								<r:RibbonGalleryItem Content="18" />
-								<r:RibbonGalleryItem Content="20" />
-								<r:RibbonGalleryItem Content="22" />
-							</r:RibbonGalleryCategory>
-						</r:RibbonGallery>
-
-					</r:RibbonComboBox>
-				</r:RibbonGroup>
-				<r:RibbonGroup x:Name="GrpExport" Header="Export" ></r:RibbonGroup>
-			</r:RibbonTab>
-			<r:RibbonTab x:Name="TabStatistiky" Header="Statistiky">
-				<r:RibbonGroup x:Name="RbgTabStatistikySoubor" Header="Soubor">
-					<r:RibbonButton x:Name="BtnVytvorit" LargeImageSource="Images\Novy_prehled_32x32.png"
-													Label="Vytvořit" Click="BtnTabPrehledyVytvorit_Click"  />
-				</r:RibbonGroup>
-			</r:RibbonTab>
-			<r:RibbonTab x:Name="RbtValidace" Header="Validace">
-                <r:RibbonGroup x:Name="RbgTabValidaceSprava" Header="Správa">
-                    <r:RibbonButton x:Name="BtnVaidovatAplikovat" LargeImageSource="Images\1532_Flag_system_red.png" Label="Vytvořit" Click="BtnVaidovatAplikovat_Click"  />
-                </r:RibbonGroup>
-
-            </r:RibbonTab>
-		</r:Ribbon>
-			<p:PrehledyStatistik Grid.Row="1" x:Name="PsPrehledy" SouborStatistik="..\Tests\AdamM.pjv" 
-							 FiltrovatAutomaticky="{Binding ElementName=ChbFiltrovatAutomaticky, Path=IsChecked, Mode=TwoWay}"
-							 RozlisovatVelikostPismen="{Binding ElementName=ChbRozlisovatVelikostPismen, Path=IsChecked, Mode=TwoWay}"
-							 HledanyText="{Binding ElementName=TxtHledanyText, Path=Text, Mode=TwoWay}" 
-							 VelikostTextu="{Binding ElementName=RbgVelikostTextu, Path=SelectedValue, Mode=TwoWay}">
-
-		</p:PrehledyStatistik>
-	</Grid>
-</r:RibbonWindow>
+        <fluent:Ribbon x:Name="rbnPasKaret">
+	        <fluent:RibbonTabItem x:Name="TabPrehledy" Header="Prohlížení">
+                <fluent:RibbonGroupBox x:Name="GrpSoubor" Header="Soubor">
+                    <fluent:Button LargeIcon="Images\Otevrit_souboru_32x32.png" Header="Otevřít" Command="{Binding OpenFileCommand}"
+                                   />
+                    <fluent:Button x:Name="BtnTabPrehledyVytvorit" LargeIcon="Images\Novy_prehled_32x32.png"
+                                   Header="Uložit" Command="{Binding SaveCommand}" IsEnabled="{Binding IsSaving}" />
+                    <fluent:Button LargeIcon="Images\Editovat_soubor.png"
+                                   Header="Upravit Zpracování" Command="{Binding OpenSettingsCommand}" IsEnabled="{Binding IsZpracovaníOtevreno}" />
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox x:Name="GrpFiltrovani" Header="Filtrování">
+                    <fluent:CheckBox x:Name="ChbFiltrovatAutomaticky" Header="filtrovat automaticky" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterAutomaticCommand}" />
+                    <fluent:CheckBox x:Name="ChbRozlisovatVelikostPismen" Header="rozlišovat velikost písmen" IsChecked="True" CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding RozlisovatVelikostPismenCommand}" />
+                    <fluent:TextBox x:Name="BtnFilterText" Header="Text pro filter"  />
+                    <fluent:Button x:Name="BtnHledat" LargeIcon="Images\FindHS.png" Icon="Images\FindHS.png" Command="{Binding FilterTextCommand}" CommandParameter="{Binding Text ,Source={x:Reference BtnFilterText}}" Margin="0,0,0,0" />
+                </fluent:RibbonGroupBox>
+	            <fluent:RibbonGroupBox x:Name="GrpZobrazeni" Header="Zobrazení">
+		            <fluent:CheckBox x:Name="ChbZnaky" Header="Znaky" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterZnakyCommand}" />
+		            <fluent:CheckBox x:Name="ChbSlova" Header="Slova" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterSlovaCommand}" />
+		            <fluent:CheckBox x:Name="ChbUseky" Header="Úseky" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterUsekyCommand}" />
+		            <fluent:CheckBox x:Name="ChbDigramy" Header="Digramy" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterDigramyCommand}" />
+		            <fluent:CheckBox x:Name="ChbTrigramy" Header="Trigramy" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterTrigramyCommand}" />
+	            </fluent:RibbonGroupBox>
+		        <fluent:RibbonGroupBox x:Name="GrpFormat" Header="Formát" >
+			        <fluent:ComboBox Header="velikost" SelectedIndex="0" SelectionChanged="Selector_OnSelectionChanged">
+				        <fluent:ComboBox.ItemsSource>
+					        <x:Array Type="{x:Type sys:String}">
+						        <sys:String>10</sys:String>
+						        <sys:String>12</sys:String>
+						        <sys:String>14</sys:String>
+						        <sys:String>16</sys:String>
+						        <sys:String>18</sys:String>
+						        <sys:String>20</sys:String>
+						        <sys:String>22</sys:String>
+					        </x:Array>
+				        </fluent:ComboBox.ItemsSource>
+			        </fluent:ComboBox>
+		        </fluent:RibbonGroupBox>
+	            <fluent:RibbonGroupBox Header="Ostatní">
+		            <!-- <fluent:Button LargeIcon="Images\Question.png" Header="Nápověda" /> -->
+		            <fluent:Button Command="{Binding AboutCommand}" LargeIcon="Images\Info.png" Header="O aplikaci"/>
+	            </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+        </fluent:Ribbon>
+        <controls:PrehledyStatistik x:Name="PrehledyStatistik" Grid.Row="1" /> 
+    </Grid>
+</fluent:RibbonWindow>

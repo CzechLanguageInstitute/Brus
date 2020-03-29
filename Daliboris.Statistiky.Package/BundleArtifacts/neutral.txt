@@ -1,0 +1,2 @@
+MainPackage=C:\Projects\Brus\Daliboris.Statistiky.Package\bin\AnyCPU\Debug\Daliboris.Statistiky.Package_1.0.0.0_AnyCPU_Debug.appx
+SymbolPackage=C:\Projects\Brus\Daliboris.Statistiky.Package\obj\Debug\Symbols\Daliboris.Statistiky.Package_1.0.0.0_AnyCPU_Debug.appxsym
