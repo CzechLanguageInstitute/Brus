@@ -1,6 +1,7 @@
 ﻿<fluent:RibbonWindow x:Class="Daliboris.Statistiky.UI.WPF.MainWindow"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                      xmlns:wpf="clr-namespace:Daliboris.Statistiky.UI.WPF"
                      xmlns:viewmodels="clr-namespace:Daliboris.Statistiky.UI.WPF.ViewModels"
                      xmlns:fluent="urn:fluent-ribbon"
@@ -8,9 +9,6 @@
                      Title="Přehled statistik"
                      x:Name="RibbonWindow"
                      Width="640" Height="480">
-	<fluent:RibbonWindow.DataContext>
-		<viewmodels:MainWindowsViewModel/>
-	</fluent:RibbonWindow.DataContext>
 	<Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -28,24 +26,39 @@
                                    Header="Upravit Zpracování" Command="{Binding OpenSettingsCommand}" IsEnabled="{Binding IsZpracovaníOtevreno}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox x:Name="GrpFiltrovani" Header="Filtrování">
-                    <fluent:CheckBox x:Name="ChbFiltrovatAutomaticky" Header="filtrovat automaticky" IsChecked="True" />
-                    <fluent:CheckBox x:Name="ChbRozlisovatVelikostPismen" Header="rozlišovat velikost písmen"
-                                     IsChecked="True" />
-					<fluent:TextBox Header="Test"/>
+                    <fluent:CheckBox x:Name="ChbFiltrovatAutomaticky" Header="filtrovat automaticky" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterAutomaticCommand}" />
+                    <fluent:CheckBox x:Name="ChbRozlisovatVelikostPismen" Header="rozlišovat velikost písmen" IsChecked="True" CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding RozlisovatVelikostPismenCommand}" />
+               
+                    
                 </fluent:RibbonGroupBox>
 	            <fluent:RibbonGroupBox x:Name="GrpZobrazeni" Header="Zobrazení">
-		            <fluent:CheckBox x:Name="ChbZnaky" Header="Znaky" IsChecked="False" />
-		            <fluent:CheckBox x:Name="ChbSlova" Header="Slova" IsChecked="False" />
-		            <fluent:CheckBox x:Name="ChbUseky" Header="Úseky" IsChecked="False" />
-		            <fluent:CheckBox x:Name="ChbDigramy" Header="Digramy" IsChecked="False" />
-		            <fluent:CheckBox x:Name="ChbTrigramy" Header="Trigramy" IsChecked="False" />
+		            <fluent:CheckBox x:Name="ChbZnaky" Header="Znaky" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterZnakyCommand}" />
+		            <fluent:CheckBox x:Name="ChbSlova" Header="Slova" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterSlovaCommand}" />
+		            <fluent:CheckBox x:Name="ChbUseky" Header="Úseky" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterUsekyCommand}" />
+		            <fluent:CheckBox x:Name="ChbDigramy" Header="Digramy" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterDigramyCommand}" />
+		            <fluent:CheckBox x:Name="ChbTrigramy" Header="Trigramy" IsChecked="True"  CommandParameter="{Binding IsChecked ,RelativeSource={RelativeSource Self}}" Command="{Binding FilterTrigramyCommand}" />
 	            </fluent:RibbonGroupBox>
+		        <fluent:RibbonGroupBox x:Name="GrpFormat" Header="Formát" >
+			        <fluent:ComboBox Header="velikost" SelectedIndex="0" SelectionChanged="Selector_OnSelectionChanged">
+				        <fluent:ComboBox.ItemsSource>
+					        <x:Array Type="{x:Type sys:String}">
+						        <sys:String>10</sys:String>
+						        <sys:String>12</sys:String>
+						        <sys:String>14</sys:String>
+						        <sys:String>16</sys:String>
+						        <sys:String>18</sys:String>
+						        <sys:String>20</sys:String>
+						        <sys:String>22</sys:String>
+					        </x:Array>
+				        </fluent:ComboBox.ItemsSource>
+			        </fluent:ComboBox>
+		        </fluent:RibbonGroupBox>
 	            <fluent:RibbonGroupBox Header="Ostatní">
-		            <fluent:Button LargeIcon="Images\Question.png" Header="Nápověda" />
+		            <!-- <fluent:Button LargeIcon="Images\Question.png" Header="Nápověda" /> -->
 		            <fluent:Button LargeIcon="Images\Info.png" Header="O aplikaci"/>
 	            </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
         </fluent:Ribbon>
-        <controls:PrehledyStatistik Grid.Row="1" DataContext="{Binding Data}" /> 
+        <controls:PrehledyStatistik x:Name="PrehledyStatistik" Grid.Row="1" /> 
     </Grid>
 </fluent:RibbonWindow>

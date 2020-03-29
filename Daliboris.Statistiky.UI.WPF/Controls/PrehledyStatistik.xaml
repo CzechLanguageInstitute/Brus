@@ -6,22 +6,382 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:Daliboris.Statistiky.UI.WPF.Converters"
              xmlns:st="clr-namespace:Daliboris.Statistiky;assembly=Daliboris.Statistiky.Core"
-             xmlns:treeview="http://schemas.aspitalia.com/Ricciolo/Controls"
+             xmlns:treeListView="clr-namespace:Daliboris.Statistiky.UI.WPF.Controls.TreeListView"
+             xmlns:diskSnapshot="clr-namespace:DiskSnapshot"
+             xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic"
+             xmlns:wpf="clr-namespace:Daliboris.Statistiky.UI.WPF"
+             xmlns:themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="1000">
     <!-- Dictionary -->
     <UserControl.Resources>
+        <treeListView:LevelToIndentConverter x:Key="LevelToIndentConverter" />
+        <Style x:Key="TreeListViewItemStyle" TargetType="{x:Type treeListView:TreeListViewItem}">
+            <Setter Property="Panel.Background">
+                <Setter.Value>
+                    <SolidColorBrush>#00FFFFFF</SolidColorBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalContentAlignment">
+                <Setter.Value>
+                    <Binding Path="HorizontalContentAlignment"
+                             RelativeSource="{RelativeSource AncestorLevel=1, Mode=FindAncestor, AncestorType=ItemsControl}" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalContentAlignment">
+                <Setter.Value>
+                    <Binding Path="VerticalContentAlignment"
+                             RelativeSource="{RelativeSource AncestorLevel=1, Mode=FindAncestor, AncestorType=ItemsControl}" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Control.Padding">
+                <Setter.Value>
+                    <Thickness>1,0,0,0</Thickness>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextElement.Foreground">
+                <Setter.Value>
+                    <DynamicResource ResourceKey="{x:Static SystemColors.ControlTextBrushKey}" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style TargetType="IFrameworkInputElement">
+                        <Style.Resources>
+                            <ResourceDictionary />
+                        </Style.Resources>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="treeListView:TreeListViewItem">
+                        <StackPanel>
+                            <Border BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                    BorderThickness="{TemplateBinding Border.BorderThickness}" Name="Bd"
+                                    Background="{TemplateBinding Panel.Background}" SnapsToDevicePixels="True"
+                                    Padding="{TemplateBinding Control.Padding}">
+                                <diskSnapshot:TreeGridViewRowPresenter x:Name="PART_Header"
+                                                                       Content="{TemplateBinding Header}"
+                                                                       Columns="{Binding Path=Columns,RelativeSource={RelativeSource AncestorType={x:Type treeListView:TreeListView}}}">
+                                    <diskSnapshot:TreeGridViewRowPresenter.FirstColumnIndent>
+                                        <Binding Path="Level" Converter="{StaticResource LevelToIndentConverter}"
+                                                 RelativeSource="{RelativeSource AncestorType={x:Type treeListView:TreeListViewItem}}"
+                                                 ConverterParameter="19" />
+                                    </diskSnapshot:TreeGridViewRowPresenter.FirstColumnIndent>
+                                    <diskSnapshot:TreeGridViewRowPresenter.Expander>
+                                        <Grid>
+                                            <ToggleButton Width="19" Height="16" ClickMode="Press" Name="Expander"
+                                                          IsChecked="{Binding Path=IsExpanded,RelativeSource={RelativeSource AncestorType={x:Type treeListView:TreeListViewItem}}}">
+                                                <ToggleButton.Style>
+                                                    <Style TargetType="ToggleButton">
+                                                        <Style.Resources>
+                                                            <ResourceDictionary />
+                                                        </Style.Resources>
+                                                        <Setter Property="UIElement.Focusable">
+                                                            <Setter.Value>
+                                                                <sys:Boolean>False</sys:Boolean>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter Property="FrameworkElement.Width">
+                                                            <Setter.Value>
+                                                                <sys:Double>19</sys:Double>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter Property="FrameworkElement.Height">
+                                                            <Setter.Value>
+                                                                <sys:Double>13</sys:Double>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter Property="Control.Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="ToggleButton">
+                                                                    <Border Height="13" Width="19"
+                                                                            Background="#00FFFFFF">
+                                                                        <Border Height="9"
+                                                                                BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
+                                                                                Width="9" BorderThickness="1,1,1,1"
+                                                                                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                                                                                SnapsToDevicePixels="True">
+                                                                            <Path Margin="1,1,1,1"
+                                                                                  Data="M0,2L0,3 2,3 2,5 3,5 3,3 5,3 5,2 3,2 3,0 2,0 2,2z"
+                                                                                  Fill="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"
+                                                                                  Name="ExpandPath" />
+                                                                        </Border>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="ToggleButton.IsChecked">
+                                                                            <Setter Property="Path.Data"
+                                                                                    TargetName="ExpandPath">
+                                                                                <Setter.Value>
+                                                                                    <StreamGeometry>M0,2L0,3 5,3 5,2z</StreamGeometry>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                            <Trigger.Value>
+                                                                                <sys:Boolean>True</sys:Boolean>
+                                                                            </Trigger.Value>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </ToggleButton.Style>
+                                            </ToggleButton>
+                                        </Grid>
+                                    </diskSnapshot:TreeGridViewRowPresenter.Expander>
+                                </diskSnapshot:TreeGridViewRowPresenter>
+                            </Border>
+
+                            <ItemsPresenter Name="ItemsHost" />
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="TreeViewItem.IsExpanded">
+                                <Setter Property="UIElement.Visibility" TargetName="ItemsHost"
+                                        Value="{x:Static Visibility.Collapsed}" />
+                                <Trigger.Value>
+                                    <sys:Boolean>False</sys:Boolean>
+                                </Trigger.Value>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.HasItems">
+                                <Setter Property="UIElement.Visibility" TargetName="Expander"
+                                        Value="{x:Static Visibility.Hidden}" />
+                                <Trigger.Value>
+                                    <sys:Boolean>False</sys:Boolean>
+                                </Trigger.Value>
+                            </Trigger>
+                            <Trigger Property="TreeViewItem.IsSelected">
+                                <Setter Property="Panel.Background" TargetName="Bd"
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                <Setter Property="TextElement.Foreground">
+                                    <Setter.Value>
+                                        <DynamicResource ResourceKey="{x:Static SystemColors.HighlightTextBrushKey}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Trigger.Value>
+                                    <sys:Boolean>True</sys:Boolean>
+                                </Trigger.Value>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="TreeViewItem.IsSelected">
+                                        <Condition.Value>
+                                            <sys:Boolean>True</sys:Boolean>
+                                        </Condition.Value>
+                                    </Condition>
+                                    <Condition Property="TreeViewItem.IsSelectionActive">
+                                        <Condition.Value>
+                                            <sys:Boolean>False</sys:Boolean>
+                                        </Condition.Value>
+                                    </Condition>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Panel.Background" TargetName="Bd"
+                                        Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                                <Setter Property="TextElement.Foreground">
+                                    <Setter.Value>
+                                        <DynamicResource ResourceKey="{x:Static SystemColors.ControlTextBrushKey}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                            <Trigger Property="treeListView:TreeListViewItem.IsMultiSelected">
+                                <Setter Property="Panel.Background" TargetName="Bd"
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                <Setter Property="TextElement.Foreground">
+                                    <Setter.Value>
+                                        <DynamicResource ResourceKey="{x:Static SystemColors.HighlightTextBrushKey}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Trigger.Value>
+                                    <sys:Boolean>True</sys:Boolean>
+                                </Trigger.Value>
+                            </Trigger>
+                            <Trigger Property="UIElement.IsEnabled">
+                                <Setter Property="TextElement.Foreground">
+                                    <Setter.Value>
+                                        <DynamicResource ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Trigger.Value>
+                                    <sys:Boolean>False</sys:Boolean>
+                                </Trigger.Value>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+        <Style TargetType="{x:Type treeListView:TreeListViewItem}" BasedOn="{StaticResource TreeListViewItemStyle}" />
+
+        <Style x:Key="scroll">
+            <Setter Property="UIElement.Focusable">
+                <Setter.Value>
+                    <sys:Boolean>False</sys:Boolean>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Grid Background="{TemplateBinding Background}"
+                              SnapsToDevicePixels="true">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <DockPanel Margin="{TemplateBinding Padding}">
+                                <treeListView:DragDropScrollViewer DockPanel.Dock="Top"
+                                                                   HorizontalScrollBarVisibility="Hidden"
+                                                                   VerticalScrollBarVisibility="Hidden"
+                                                                   Focusable="false">
+                                    <GridViewHeaderRowPresenter
+                                        Columns="{Binding Path=Columns,RelativeSource={RelativeSource AncestorType={x:Type treeListView:TreeListView}}}"
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </treeListView:DragDropScrollViewer>
+                                <ScrollContentPresenter Name="PART_ScrollContentPresenter"
+                                                        KeyboardNavigation.DirectionalNavigation="Local"
+                                                        Content="{TemplateBinding Content}"
+                                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                        CanContentScroll="{TemplateBinding CanContentScroll}"
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </DockPanel>
+                            <ScrollBar Name="PART_HorizontalScrollBar"
+                                       Orientation="Horizontal"
+                                       Grid.Row="1"
+                                       Minimum="0.0"
+                                       Maximum="{TemplateBinding ScrollableWidth}"
+                                       ViewportSize="{TemplateBinding ViewportWidth}"
+                                       Value="{Binding Path=HorizontalOffset,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"
+                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                       Cursor="Arrow" />
+                            <ScrollBar Name="PART_VerticalScrollBar"
+                                       Orientation="Vertical"
+                                       Grid.Column="1"
+                                       Minimum="0.0"
+                                       Maximum="{TemplateBinding ScrollableHeight}"
+                                       ViewportSize="{TemplateBinding ViewportHeight}"
+                                       Value="{Binding Path=VerticalOffset,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"
+                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                       Cursor="Arrow" />
+                            <DockPanel Grid.Column="1"
+                                       Grid.Row="1"
+                                       Background="{Binding Path=Background,ElementName=PART_VerticalScrollBar}"
+                                       LastChildFill="false">
+                                <Rectangle DockPanel.Dock="Left"
+                                           Width="1"
+                                           Fill="White"
+                                           Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+                                <Rectangle DockPanel.Dock="Top"
+                                           Height="1"
+                                           Fill="White"
+                                           Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+                            </DockPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type treeListView:TreeListView}" x:Key="TreeListViewStyle">
+            <Setter Property="Panel.Background">
+                <Setter.Value>
+                    <DynamicResource ResourceKey="{x:Static SystemColors.WindowBrushKey}" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Border.BorderBrush">
+                <Setter.Value>
+                    <SolidColorBrush>#00FFFFFF</SolidColorBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Border.BorderThickness">
+                <Setter.Value>
+                    <Thickness>2,2,2,2</Thickness>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextElement.Foreground">
+                <Setter.Value>
+                    <DynamicResource ResourceKey="{x:Static SystemColors.WindowTextBrushKey}" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility">
+                <Setter.Value>
+                    <x:Static Member="ScrollBarVisibility.Auto" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility">
+                <Setter.Value>
+                    <x:Static Member="ScrollBarVisibility.Auto" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.CanContentScroll">
+                <Setter.Value>
+                    <sys:Boolean>True</sys:Boolean>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="treeListView:TreeListView">
+                        <themes:ClassicBorderDecorator BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                                       BorderStyle="Sunken"
+                                                       BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                                       Name="Bd" Background="{TemplateBinding Panel.Background}"
+                                                       SnapsToDevicePixels="True">
+
+                            <treeListView:DragDropScrollViewer Style="{StaticResource scroll}"
+                                                               Background="{TemplateBinding Background}"
+                                                               Focusable="false"
+                                                               CanContentScroll="false"
+                                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                                               Padding="{TemplateBinding Padding}"
+                                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                            </treeListView:DragDropScrollViewer>
+
+                        </themes:ClassicBorderDecorator>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="UIElement.IsEnabled">
+                                <Setter Property="Panel.Background" TargetName="Bd"
+                                        Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                                <Trigger.Value>
+                                    <sys:Boolean>False</sys:Boolean>
+                                </Trigger.Value>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+        <Style TargetType="{x:Type treeListView:TreeListView}" BasedOn="{StaticResource TreeListViewStyle}" />
+
+
         <ObjectDataProvider x:Key="UkazyDS" ObjectType="{x:Type st:Ukazy}" d:IsDataSource="True" />
+        
+        
         <converters:BooleanToHiddenVisibility x:Key="Bool2Visibility" />
         <converters:String2Int32 x:Key="String2Int" />
         <converters:Character2Kod x:Key="Char2Kod" />
         <sys:String x:Key="sInt">int</sys:String>
         <sys:String x:Key="sHex">hex</sys:String>
         <sys:String x:Key="sKategorie">kategorie</sys:String>
-        
-        
-        
-        
+
+
         <DataTemplate x:Key="dtPocty">
             <!--
 			<TextBlock FontFamily="Palatino Linotype" Typography.Fraction="Stacked">
@@ -72,124 +432,123 @@
         </DataTemplate>
 
 
-        <!-- <Style TargetType="{x:Type DataGrid}"> -->
-        <!--     <Setter Property="FontFamily" Value="Times New Roman" /> -->
-        <!--     <Setter Property="FontSize" Value="14" /> -->
-        <!--     <Setter Property="AlternationCount" Value="0" /> -->
-        <!--     <Setter Property="AutoGenerateColumns" Value="False" /> -->
-        <!--     <Setter Property="AlternatingRowBackground" Value="BlanchedAlmond" /> -->
-        <!--     ~1~<Setter Property="VerticalContentAlignment" Value="Stretch"/>@1@ -->
-        <!--     <Setter Property="VerticalContentAlignment" Value="Top" /> -->
-        <!-- </Style> -->
-        <!-- <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}"> -->
-        <!--     <Setter Property="Width" Value="8" /> -->
-        <!--     <Setter Property="Background" Value="Transparent" /> -->
-        <!--     <Setter Property="Cursor" Value="SizeWE" /> -->
-        <!--     <Setter Property="Template"> -->
-        <!--         <Setter.Value> -->
-        <!--             <ControlTemplate TargetType="{x:Type Thumb}"> -->
-        <!--                 <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" /> -->
-        <!--             </ControlTemplate> -->
-        <!--         </Setter.Value> -->
-        <!--     </Setter> -->
-        <!-- </Style> -->
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="FontFamily" Value="Times New Roman" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="AlternationCount" Value="0" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="AlternatingRowBackground" Value="BlanchedAlmond" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+        </Style>
+        <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Cursor" Value="SizeWE" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-       <!--  <Style x:Key="ColumnHeaderLeftGripperStyle" BasedOn="{StaticResource ColumnHeaderGripperStyle}" -->
-       <!--         TargetType="{x:Type Thumb}"> -->
-       <!--      <Setter Property="Width" Value="8" /> -->
-       <!--      <Setter Property="Background" Value="Transparent" /> -->
-       <!--      <Setter Property="Cursor" Value="SizeWE" /> -->
-       <!--      <Setter Property="Template"> -->
-       <!--          <Setter.Value> -->
-       <!--              <ControlTemplate TargetType="{x:Type Thumb}"> -->
-       <!--                  <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" -->
-       <!--                          x:Name="Border"> -->
-                            <!--<Canvas> -->
-							<!-- 	<Line RenderOptions.EdgeMode="Aliased" X1="7" Y1="{Binding ElementName=Border, Path=ActualHeight}" -->
-							<!-- 		  X2="7" Y2="0" Stroke="DarkGray"/> -->
-							<!-- </Canvas>--> 
-       <!--                  </Border> -->
-       <!--              </ControlTemplate> -->
-       <!--          </Setter.Value> -->
-       <!--      </Setter> -->
-       <!--  </Style> -->
-        
-        <!-- <Style x:Key="Hlavicka" TargetType="{x:Type DataGridColumnHeader}"> -->
-        <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
-        <!--     ~1~<Setter Property="Background" Value="Pink" />@1@ -->
-        <!-- -->
-        <!--     <Setter Property="Template"> -->
-        <!--         <Setter.Value> -->
-        <!--             <ControlTemplate TargetType="{x:Type DataGridColumnHeader}"> -->
-        <!--                 <Grid> -->
-        <!-- -->
-        <!--                     <th:DataGridHeaderBorder SortDirection="{TemplateBinding SortDirection}" -->
-        <!--                                              IsHovered="{TemplateBinding IsMouseOver}" -->
-        <!--                                              IsPressed="{TemplateBinding IsPressed}" -->
-        <!--                                              IsClickable="{TemplateBinding CanUserSort}" -->
-        <!--                                              Background="{TemplateBinding Background}" -->
-        <!--                                              BorderBrush="{TemplateBinding BorderBrush}" -->
-        <!--                                              BorderThickness="{TemplateBinding BorderThickness}" -->
-        <!--                                              Padding="{TemplateBinding Padding}" -->
-        <!--                                              SeparatorVisibility="{TemplateBinding SeparatorVisibility}" -->
-        <!--                                              SeparatorBrush="{TemplateBinding SeparatorBrush}"> -->
-        <!--                         <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" -->
-        <!--                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
-        <!--                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" /> -->
-        <!--                     </th:DataGridHeaderBorder> -->
-        <!-- -->
-        <!-- -->
-        <!--                     <Thumb x:Name="PART_LeftHeaderGripper" -->
-        <!--                            HorizontalAlignment="Left" -->
-        <!--                            Style="{StaticResource ColumnHeaderGripperStyle}" /> -->
-        <!--                     <Thumb x:Name="PART_RightHeaderGripper" -->
-        <!--                            HorizontalAlignment="Right" -->
-        <!--                            Style="{StaticResource ColumnHeaderLeftGripperStyle}" /> -->
-        <!--                     <Path x:Name="UpArrow" Fill="Black" HorizontalAlignment="Right" -->
-        <!--                           VerticalAlignment="Center" -->
-        <!--                           Margin="0,0,7,0" Visibility="Hidden" Data="M0,0 L6,0 L3,5 L0,0" /> -->
-        <!--                     <Path x:Name="DownArrow" Fill="Black" HorizontalAlignment="Right" -->
-        <!--                           VerticalAlignment="Center" Margin="0,0,7,0" -->
-        <!--                           Visibility="Hidden" Data="M0,5 L6,5 L3,0 L0,5" /> -->
-        <!--                 </Grid> -->
-        <!--                 <ControlTemplate.Triggers> -->
-        <!--                     <Trigger Property="SortDirection" Value="Descending"> -->
-        <!--                         <Setter TargetName="UpArrow" -->
-        <!--                                 Property="Visibility" Value="Hidden" /> -->
-        <!--                         <Setter TargetName="DownArrow" -->
-        <!--                                 Property="Visibility" Value="Visible" /> -->
-        <!--                     </Trigger> -->
-        <!--                     <Trigger Property="SortDirection" Value="Ascending"> -->
-        <!--                         <Setter TargetName="DownArrow" -->
-        <!--                                 Property="Visibility" Value="Hidden" /> -->
-        <!--                         <Setter TargetName="UpArrow" -->
-        <!--                                 Property="Visibility" Value="Visible" /> -->
-        <!--                     </Trigger> -->
-        <!--                 </ControlTemplate.Triggers> -->
-        <!--             </ControlTemplate> -->
-        <!--         </Setter.Value> -->
-        <!--     </Setter> -->
-        <!-- -->
-        <!-- </Style> -->
-        <!-- <Style BasedOn="{StaticResource Hlavicka}" x:Key="Nadpis" TargetType="{x:Type DataGridColumnHeader}"> -->
-        <!--     <Setter Property="FontSize" Value="14" /> -->
-        <!--     <Setter Property="Foreground" Value="Green" /> -->
-        <!--     <Setter Property="Background" Value="Gold" /> -->
-        <!--     <Setter Property="Padding" Value="3" /> -->
-        <!-- </Style> -->
-        <!-- <Style BasedOn="{StaticResource Hlavicka}" x:Key="Popiska" TargetType="{x:Type DataGridColumnHeader}"> -->
-        <!--     <Setter Property="FontSize" Value="14" /> -->
-        <!--     <Setter Property="Foreground" Value="Green" /> -->
-        <!--     <Setter Property="Background" Value="Gold" /> -->
-        <!--     <Setter Property="Padding" Value="3" /> -->
-        <!-- </Style> -->
+        <Style x:Key="ColumnHeaderLeftGripperStyle" BasedOn="{StaticResource ColumnHeaderGripperStyle}"
+               TargetType="{x:Type Thumb}">
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Cursor" Value="SizeWE" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
+                                x:Name="Border">
+                            <Canvas>
+                                <Line RenderOptions.EdgeMode="Aliased" X1="7"
+                                      Y1="{Binding ElementName=Border, Path=ActualHeight}"
+                                      X2="7" Y2="0" Stroke="DarkGray" />
+                            </Canvas>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Hlavicka" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="Pink" />
+            <!-- -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                        <Grid>
+                            <!-- -->
+                            <themes1:DataGridHeaderBorder SortDirection="{TemplateBinding SortDirection}"
+                                                          IsHovered="{TemplateBinding IsMouseOver}"
+                                                          IsPressed="{TemplateBinding IsPressed}"
+                                                          IsClickable="{TemplateBinding CanUserSort}"
+                                                          Background="{TemplateBinding Background}"
+                                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                                          BorderThickness="{TemplateBinding BorderThickness}"
+                                                          Padding="{TemplateBinding Padding}"
+                                                          SeparatorVisibility="{TemplateBinding SeparatorVisibility}"
+                                                          SeparatorBrush="{TemplateBinding SeparatorBrush}">
+                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                            </themes1:DataGridHeaderBorder>
+                            <!-- -->
+                            <!-- -->
+                            <Thumb x:Name="PART_LeftHeaderGripper"
+                                   HorizontalAlignment="Left"
+                                   Style="{StaticResource ColumnHeaderGripperStyle}" />
+                            <Thumb x:Name="PART_RightHeaderGripper"
+                                   HorizontalAlignment="Right"
+                                   Style="{StaticResource ColumnHeaderLeftGripperStyle}" />
+                            <Path x:Name="UpArrow" Fill="Black" HorizontalAlignment="Right"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,7,0" Visibility="Hidden" Data="M0,0 L6,0 L3,5 L0,0" />
+                            <Path x:Name="DownArrow" Fill="Black" HorizontalAlignment="Right"
+                                  VerticalAlignment="Center" Margin="0,0,7,0"
+                                  Visibility="Hidden" Data="M0,5 L6,5 L3,0 L0,5" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="SortDirection" Value="Descending">
+                                <Setter TargetName="UpArrow"
+                                        Property="Visibility" Value="Hidden" />
+                                <Setter TargetName="DownArrow"
+                                        Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <Trigger Property="SortDirection" Value="Ascending">
+                                <Setter TargetName="DownArrow"
+                                        Property="Visibility" Value="Hidden" />
+                                <Setter TargetName="UpArrow"
+                                        Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!-- -->
+        </Style>
+        <Style BasedOn="{StaticResource Hlavicka}" x:Key="Nadpis" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="Green" />
+            <Setter Property="Background" Value="Gold" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
+        <Style BasedOn="{StaticResource Hlavicka}" x:Key="Popiska" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="Green" />
+            <Setter Property="Background" Value="Gold" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
 
     </UserControl.Resources>
 
 
-    <!-- Hlavní stránka -->
-
-
+    <!-- Výpis úkazů -->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -208,11 +567,15 @@
 
         <ScrollViewer x:Name="ScvPosunovacStatistiky" Grid.Column="0" VerticalScrollBarVisibility="Auto">
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                <treeview:TreeListView x:Name="tlvStatistiky"
-                                ItemsSource="{Binding XPath=/statistiky/statistika}"
-                                ItemTemplate="{StaticResource dt}" Margin="0,0,0,0"
-                                VerticalAlignment="Top">
-                    <treeview:TreeListView.Columns>
+                <treeListView:TreeListView x:Name="tlvStatistiky"
+                                           DataContext="{Binding Data}"
+                                           ItemsSource="{Binding XPath=/statistiky/statistika}"
+                                           ItemTemplate="{StaticResource dt}" Margin="0,0,0,0"
+                                           VerticalAlignment="Top"
+                                           SelectedItemChanged="tlvStatistiky_SelectedItemChanged" 
+                                           Style="{StaticResource TreeListViewStyle}"
+                                           >
+                    <treeListView:TreeListView.Columns>
                         <GridViewColumn Header="" CellTemplate="{StaticResource dtObsahPrvky}" Width="300" />
                         <GridViewColumn CellTemplate="{StaticResource dtObsahZnaky}" Width="60">
                             <GridViewColumnHeader>
@@ -249,102 +612,116 @@
                                 </StackPanel>
                             </GridViewColumnHeader>
                         </GridViewColumn>
-                    </treeview:TreeListView.Columns>
-                </treeview:TreeListView>
+                    </treeListView:TreeListView.Columns>
+                </treeListView:TreeListView>
             </StackPanel>
         </ScrollViewer>
 
 
-        <!-- <DataGrid x:Name="dtgZnaky" Grid.Column="1" Grid.Row="0" -->
-        <!--           AutoGenerateColumns="False" -->
-        <!--           ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"  -->
-        <!--           Visibility="{Binding ElementName=chbZnaky, Path=IsChecked, Converter={StaticResource Bool2Visibility}}" -->
-        <!--           Tag="1" SelectionChanged="Dtg_SelectionChanged" > -->
-        <!-- 	<DataGrid.Columns> -->
-        <!-- 		<DataGridTextColumn Header="Znaky" Width="Auto"  MaxWidth="400" SortMemberPath="Nazev" HeaderStyle="{StaticResource Nadpis}" Binding="{Binding Nazev}" /> -->
-        <!-- 		<DataGridTextColumn Header="Počet" MinWidth="80" SortMemberPath="Pocet" Binding="{Binding Pocet}" HeaderStyle="{StaticResource Popiska}"/> -->
-        <!-- 	</DataGrid.Columns> -->
-        <!-- 	<DataGrid.RowDetailsTemplate> -->
-        <!-- 		<DataTemplate> -->
-        <!-- 			<StackPanel Orientation="Vertical"> -->
-        <!-- 				<TextBlock FontSize="32" FontFamily="TITUS Cyberbit Basic" Text="{Binding Nazev}" HorizontalAlignment="Center" /> -->
-        <!-- 				<StackPanel Orientation="Horizontal"> -->
-        <!-- 				<TextBlock Text="{Binding Path = Nazev, Converter={StaticResource Char2Kod}, ConverterParameter={StaticResource sHex}}" Margin="5,0,5,5" /> -->
-        <!-- 				<TextBlock Text="{Binding Path = Nazev, Converter={StaticResource Char2Kod}, ConverterParameter={StaticResource sKategorie}}" Margin="5,0,5,5" /> -->
-        <!-- 				</StackPanel> -->
-        <!-- 			</StackPanel> -->
-        <!-- 		</DataTemplate> -->
-        <!-- 	</DataGrid.RowDetailsTemplate> -->
-        <!-- -->
-        <!-- </DataGrid> -->
-        <!-- <DataGrid x:Name="dtgSlova" Grid.Column="2" Grid.Row="0" -->
-        <!-- 	 AutoGenerateColumns="False" -->
-        <!-- 	ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"  -->
-        <!-- 		  Visibility="{Binding ElementName=chbSlova, Path=IsChecked, Converter={StaticResource Bool2Visibility}}" -->
-        <!-- 		  Height="{Binding ElementName=ScvPosunovacStatistiky, Path=ActualHeight}" -->
-        <!-- 		  Tag="4" SelectionChanged="Dtg_SelectionChanged"> -->
-        <!-- 	<DataGrid.Columns> -->
-        <!-- 		<DataGridTextColumn Header="Slova" Width="Auto"  MaxWidth="400" SortMemberPath="Nazev" Binding="{Binding Nazev}" HeaderStyle="{StaticResource Nadpis}"/> -->
-        <!-- 		<DataGridTextColumn Header="Počet" MinWidth="80" SortMemberPath="Pocet" Binding="{Binding Pocet}" HeaderStyle="{StaticResource Popiska}"/> -->
-        <!-- 	</DataGrid.Columns> -->
-        <!-- </DataGrid> -->
-        <!-- -->
-        <!-- <DataGrid x:Name="dtgUseky" Grid.Column="3" Grid.Row="0" -->
-        <!-- 	 AutoGenerateColumns="False" -->
-        <!-- 	ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"   -->
-        <!-- 		  Visibility="{Binding ElementName=chbUseky, Path=IsChecked, Converter={StaticResource Bool2Visibility}}" -->
-        <!-- 		  Height="{Binding ElementName=ScvPosunovacStatistiky, Path=ActualHeight}" -->
-        <!-- 		   Tag="5" SelectionChanged="Dtg_SelectionChanged"> -->
-        <!-- 	<DataGrid.Columns> -->
-        <!-- 		<DataGridTextColumn Header="Úseky" Width="Auto" MaxWidth="400" SortMemberPath="Nazev" Binding="{Binding Nazev}" HeaderStyle="{StaticResource Nadpis}"/> -->
-        <!-- 		<DataGridTextColumn Header="Počet" MinWidth="80" SortMemberPath="Pocet" Binding="{Binding Pocet}" HeaderStyle="{StaticResource Popiska}"/> -->
-        <!-- 	</DataGrid.Columns> -->
-        <!-- 	<DataGrid.RowDetailsTemplate> -->
-        <!-- 		<DataTemplate> -->
-        <!-- 			<DockPanel LastChildFill="True"> -->
-        <!-- 				<ScrollViewer DockPanel.Dock="Left"> -->
-        <!-- 					<ItemsControl> -->
-        <!-- 						<TextBox Foreground="Brown" FontSize="14" BorderThickness="0" -->
-        <!-- 					TextWrapping="Wrap" MaxWidth="400" -->
-        <!-- 					Text="{Binding Nazev, Mode=OneWay}" ScrollViewer.CanContentScroll="True" /> -->
-        <!-- 						<dlbp:HiglightableTextBlock Foreground="Brown" FontSize="14" -->
-        <!-- 					TextWrapping="Wrap" MaxWidth="400" -->
-        <!-- 					HighlightableText="{Binding Nazev, Mode=OneWay}" ScrollViewer.CanContentScroll="True"  -->
-        <!-- 					HighlightBackground="Blue" HighlightForeground="Yellow"> -->
-        <!-- 							 -->
-        <!-- 						</dlbp:HiglightableTextBlock> -->
-        <!-- 						-->
-        <!-- 						 -->
-        <!-- 						 -->
-        <!-- 					</ItemsControl> -->
-        <!-- 				</ScrollViewer> -->
-        <!-- 			</DockPanel> -->
-        <!-- 		</DataTemplate> -->
-        <!-- 	</DataGrid.RowDetailsTemplate> -->
-        <!-- </DataGrid> -->
-        <!-- -->
-        <!-- <DataGrid x:Name="dtgDigramy" Grid.Column="4" Grid.Row="0" -->
-        <!-- 	 AutoGenerateColumns="False" -->
-        <!-- 	ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"  -->
-        <!-- 		  Visibility="{Binding ElementName=chbDigramy, Path=IsChecked, Converter={StaticResource Bool2Visibility}}" -->
-        <!-- 		  Height="{Binding ElementName=ScvPosunovacStatistiky, Path=ActualHeight}" -->
-        <!-- 		  Tag="2" SelectionChanged="Dtg_SelectionChanged"> -->
-        <!-- 	<DataGrid.Columns> -->
-        <!-- 		<DataGridTextColumn Header="Digramy" Width="Auto"  MaxWidth="400" SortMemberPath="Nazev" Binding="{Binding Nazev}" HeaderStyle="{StaticResource Nadpis}"/> -->
-        <!-- 		<DataGridTextColumn Header="Počet" MinWidth="80" SortMemberPath="Pocet" Binding="{Binding Pocet}" HeaderStyle="{StaticResource Popiska}"/> -->
-        <!-- 	</DataGrid.Columns> -->
-        <!-- </DataGrid> -->
-        <!-- <DataGrid x:Name="dtgTrigramy" Grid.Column="5" Grid.Row="0" -->
-        <!-- 	 AutoGenerateColumns="False" -->
-        <!-- 	ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"  -->
-        <!-- 		  Visibility="{Binding ElementName=chbTrigramy, Path=IsChecked, Converter={StaticResource Bool2Visibility}}" -->
-        <!-- 		  Height="{Binding ElementName=ScvPosunovacStatistiky, Path=ActualHeight}" -->
-        <!-- 		   Tag="3" SelectionChanged="Dtg_SelectionChanged"> -->
-        <!-- 	<DataGrid.Columns> -->
-        <!-- 		<DataGridTextColumn Header="Trigramy" Width="Auto"  MaxWidth="400" SortMemberPath="Nazev" Binding="{Binding Nazev}" HeaderStyle="{StaticResource Nadpis}"/> -->
-        <!-- 		<DataGridTextColumn Header="Počet" MinWidth="80" SortMemberPath="Pocet" Binding="{Binding Pocet}" HeaderStyle="{StaticResource Popiska}"/> -->
-        <!-- 	</DataGrid.Columns> -->
-        <!-- </DataGrid> -->
+        <!-- Detail úkazů -->
+        <!-- Znaky -->
+        <DataGrid x:Name="dtgZnaky" Grid.Column="1" Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"
+                  Visibility="{Binding IsZnakyVisible, Converter={StaticResource Bool2Visibility}}"
+                  Tag="1" SelectionChanged="Dtg_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Znaky" Width="Auto" MaxWidth="400" SortMemberPath="Nazev"
+                                    HeaderStyle="{StaticResource Nadpis}" Binding="{Binding Nazev}" />
+                <DataGridTextColumn Header="Počet" MinWidth="80" SortMemberPath="Pocet" Binding="{Binding Pocet}"
+                                    HeaderStyle="{StaticResource Popiska}" />
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontSize="32" FontFamily="TITUS Cyberbit Basic" Text="{Binding Nazev}"
+                                   HorizontalAlignment="Center" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Text="{Binding Path = Nazev, Converter={StaticResource Char2Kod}, ConverterParameter={StaticResource sHex}}"
+                                Margin="5,0,5,5" />
+                            <TextBlock
+                                Text="{Binding Path = Nazev, Converter={StaticResource Char2Kod}, ConverterParameter={StaticResource sKategorie}}"
+                                Margin="5,0,5,5" />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <DataGrid x:Name="dtgSlova" Grid.Column="2" Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"
+                  Visibility="{Binding IsSlovaVisible, Converter={StaticResource Bool2Visibility}}"
+                  Height="{Binding ElementName=ScvPosunovacStatistiky, Path=ActualHeight}"
+                  Tag="4" SelectionChanged="Dtg_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Slova" Width="Auto" MaxWidth="400" SortMemberPath="Nazev"
+                                    Binding="{Binding Nazev}" HeaderStyle="{StaticResource Nadpis}" />
+                <DataGridTextColumn Header="Počet" MinWidth="80" SortMemberPath="Pocet" Binding="{Binding Pocet}"
+                                    HeaderStyle="{StaticResource Popiska}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <!-- Úseky -->
+        <DataGrid x:Name="dtgUseky" Grid.Column="3" Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"
+                  Visibility="{Binding IsUsekyVisible, Converter={StaticResource Bool2Visibility}}"
+                  Height="{Binding ElementName=ScvPosunovacStatistiky, Path=ActualHeight}"
+                  Tag="5" SelectionChanged="Dtg_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Úseky" Width="Auto" MaxWidth="400" SortMemberPath="Nazev"
+                                    Binding="{Binding Nazev}" HeaderStyle="{StaticResource Nadpis}" />
+                <DataGridTextColumn Header="Počet" MinWidth="80" SortMemberPath="Pocet" Binding="{Binding Pocet}"
+                                    HeaderStyle="{StaticResource Popiska}" />
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <DockPanel LastChildFill="True">
+                        <ScrollViewer DockPanel.Dock="Left">
+                            <ItemsControl>
+                                <TextBox Foreground="Brown" FontSize="14" BorderThickness="0"
+                                         TextWrapping="Wrap" MaxWidth="400"
+                                         Text="{Binding Nazev, Mode=OneWay}" ScrollViewer.CanContentScroll="True" />
+                                <wpf:HiglightableTextBlock Foreground="Brown" FontSize="14"
+                                                           TextWrapping="Wrap" MaxWidth="400"
+                                                           HighlightableText="{Binding Nazev, Mode=OneWay}"
+                                                           ScrollViewer.CanContentScroll="True"
+                                                           HighlightBackground="Blue" HighlightForeground="Yellow" />
+
+
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </DockPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <!-- Digramy-->
+        <DataGrid x:Name="dtgDigramy" Grid.Column="4" Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"
+                  Visibility="{Binding IsDigramyVisible, Converter={StaticResource Bool2Visibility}}"
+                  Height="{Binding ElementName=ScvPosunovacStatistiky, Path=ActualHeight}"
+                  Tag="2" SelectionChanged="Dtg_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Digramy" Width="Auto" MaxWidth="400" SortMemberPath="Nazev"
+                                    Binding="{Binding Nazev}" HeaderStyle="{StaticResource Nadpis}" />
+                <DataGridTextColumn Header="Počet" MinWidth="80" SortMemberPath="Pocet" Binding="{Binding Pocet}"
+                                    HeaderStyle="{StaticResource Popiska}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dtgTrigramy" Grid.Column="5" Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Mode=OneWay, Source={StaticResource UkazyDS}}"
+                  Visibility="{Binding IsTrigramyVisible, Converter={StaticResource Bool2Visibility}}"
+                  Height="{Binding ElementName=ScvPosunovacStatistiky, Path=ActualHeight}"
+                  Tag="3" SelectionChanged="Dtg_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Trigramy" Width="Auto" MaxWidth="400" SortMemberPath="Nazev"
+                                    Binding="{Binding Nazev}" HeaderStyle="{StaticResource Nadpis}" />
+                <DataGridTextColumn Header="Počet" MinWidth="80" SortMemberPath="Pocet" Binding="{Binding Pocet}"
+                                    HeaderStyle="{StaticResource Popiska}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
 
     </Grid>

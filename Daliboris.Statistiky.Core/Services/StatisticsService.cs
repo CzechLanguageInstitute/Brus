@@ -26,7 +26,7 @@ namespace Daliboris.Statistiky.Core.Services
         /// <summary>
         /// Sloučí detaily jednotlivých jevů za celý dokument
         /// </summary>
-        public bool SloucitDetaily { get; set; }
+        public bool SloucitDetaily { get; set; } = false;
 
 
         public void ZpracujStatistiky()

@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Windows;
 using System.Windows.Input;
 using System.Xml;
 using Daliboris.Statistiky.Core.Models.Jevy.XML;
 using Daliboris.Statistiky.Core.Services;
+using Daliboris.Statistiky.UI.WPF.Controls;
 using Daliboris.Statistiky.Word;
 using Microsoft.Win32;
 using Microsoft.Xaml.Behaviors.Core;
@@ -15,69 +18,127 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
         private bool _isSaving = false;
         private bool _isZpracovaníOtevreno = false;
         private SkupinaJevu _skupinaJevu;
-        private WordSettings _wordParserSettings;
-        private XmlDocument _data; 
-        
-        public XmlDocument Data
-        {
-            get
-            {
-                return _data;
-            }
-            set
-            {
-                if (value != _data)
-                {
-                    _data = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        
-        
-        
-        
-        public MainWindowsViewModel()
-        {
-            OpenFileCommand = new ActionCommand(OpenFile);
-            OpenSettingsCommand = new ActionCommand(OpenSettings);
-            SaveCommand = new ActionCommand(SaveSettings);
-        }
 
+        public string _fullPath;
+
+
+        public string FileName { get; set; }
+        private PrehledyStatistik _prehledyStatistikUserControl;
+        private WordSettings _wordParserSettings;
         public ICommand OpenFileCommand { get; set; }
         public ICommand OpenSettingsCommand { get; set; }
 
         public ICommand SaveCommand { get; set; }
 
-        // Path to actual load file
-        public string FileName { get; set; }
+        
+        public ICommand FilterAutomaticCommand { get; set; }
 
+        public ICommand FilterZnakyCommand { get; set; }
+
+        public ICommand FilterSlovaCommand { get; set; }
+
+        public ICommand FilterUsekyCommand { get; set; }
+
+        public ICommand FilterDigramyCommand { get; set; }
+
+        public ICommand FilterTrigramyCommand { get; set; }
+
+        public ICommand RozlisovatVelikostPismenCommand { get; set; }
+
+        public ICommand VelikostTextuCommand { get; set; }
+
+        
+        // Path to actual load file
+        
         public bool IsZpracovaníOtevreno
         {
-            get { return _isZpracovaníOtevreno; }
+            get => _isZpracovaníOtevreno;
             set
             {
-                if (value != _isZpracovaníOtevreno)
-                {
-                    _isZpracovaníOtevreno = value;
-                    OnPropertyChanged();
-                }
+                if (value == _isZpracovaníOtevreno) return;
+                _isZpracovaníOtevreno = value;
+                OnPropertyChanged();
             }
         }
 
         public bool IsSaving
         {
-            get { return _isSaving; }
+            get => _isSaving;
             set
             {
-                if (value != _isSaving)
-                {
-                    _isSaving = value;
-                    OnPropertyChanged();
-                }
+                if (value == _isSaving) return;
+                _isSaving = value;
+                OnPropertyChanged();
             }
         }
+        
+        
+        public MainWindowsViewModel(PrehledyStatistik prehledyStatistikUserControl)
+        {
+            OpenFileCommand = new ActionCommand(OpenFile);
+            OpenSettingsCommand = new ActionCommand(OpenSettings);
+            SaveCommand = new ActionCommand(SaveSettings);
+            FilterAutomaticCommand = new ActionCommand(new Action<object>(FilterAutomaticly));
+            FilterZnakyCommand = new ActionCommand(new Action<object>(FilterZnaky));
+            FilterSlovaCommand = new ActionCommand(new Action<object>(FilterSlova));
+            FilterUsekyCommand = new ActionCommand(new Action<object>(FilterUseky));
+            FilterDigramyCommand = new ActionCommand(new Action<object>(FilterDigramy));
+            FilterTrigramyCommand = new ActionCommand(new Action<object>(FilterTrigramy));
+            RozlisovatVelikostPismenCommand = new ActionCommand(new Action<object>(RozlisovatVelikostPismen));
+            VelikostTextuCommand = new ActionCommand(new Action<object>(ZmenaVelikostiTextu)); 
+            _prehledyStatistikUserControl = prehledyStatistikUserControl;
+        }
 
+
+
+        private void ZmenaVelikostiTextu(object velikostTextu)
+        {
+
+            var velikost = Convert.ToDouble((string) velikostTextu);
+            
+            ((PrehledyStatistikViewModel) _prehledyStatistikUserControl?.DataContext)?.NastavitVelikostTextu(velikost);
+
+        }
+
+        private void RozlisovatVelikostPismen(object isChecked)
+        { 
+            ((PrehledyStatistikViewModel) _prehledyStatistikUserControl.DataContext).IsRozlisovatVelikostPismen = ((bool)isChecked);
+
+        }
+        
+        private void FilterZnaky(object isChecked)
+        {
+            ((PrehledyStatistikViewModel) _prehledyStatistikUserControl.DataContext).IsZnakyVisible = ((bool)isChecked);
+        }
+
+        
+        private void FilterSlova(object isChecked)
+        {
+            ((PrehledyStatistikViewModel) _prehledyStatistikUserControl.DataContext).IsSlovaVisible = ((bool)isChecked);
+        }
+        
+        private void FilterUseky(object isChecked)
+        {
+            ((PrehledyStatistikViewModel) _prehledyStatistikUserControl.DataContext).IsUsekyVisible = ((bool)isChecked);
+        }
+        
+        private void FilterDigramy(object isChecked)
+        {
+            ((PrehledyStatistikViewModel) _prehledyStatistikUserControl.DataContext).IsDigramyVisible = ((bool)isChecked);
+        }
+        
+        private void FilterTrigramy(object isChecked)
+        {
+            ((PrehledyStatistikViewModel) _prehledyStatistikUserControl.DataContext).IsTrigramyVisible = ((bool)isChecked);
+        }
+        
+        
+        private void FilterAutomaticly(object isChecked)
+        {
+            ((PrehledyStatistikViewModel) _prehledyStatistikUserControl.DataContext).SetAutomaticFiltering((bool)isChecked);
+        }
+
+        
         private void OpenSettings()
         {
             var zpracovaniSouboru = new ZpracovaniSouboru(_wordParserSettings);
@@ -108,10 +169,9 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
 
         private void LoadWordParser(string filepath, WordSettings wordParserSettings)
         {
-            if (String.IsNullOrEmpty(filepath))
+            if (string.IsNullOrEmpty(filepath))
                 return;
-
-
+            
             var dxr = new WordService(filepath, wordParserSettings);
             var skupinaJevu = dxr.ZpracujDocx();
             _skupinaJevu = skupinaJevu;
@@ -122,18 +182,19 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
             //statisticsService.SloucitDetaily = false;
             
             var tempPath = Path.GetTempPath();
-            var filename = Guid.NewGuid().ToString();
+            var filename = Path.GetFileNameWithoutExtension(filepath);
             var extension = ".pjv";
-            string fullPath = Path.Combine(tempPath, filename, extension);
+            string fullPath = $"{tempPath}{filename}{extension}";
+            
+            if(File.Exists(fullPath))
+            {
+                File.SetAttributes(fullPath, FileAttributes.Normal);
+                File.Delete(fullPath); 
+            }
             
             StatisticsService.UlozStatistiky(_skupinaJevu,fullPath , FormatUlozeniSeznamu.Text);
             LoadPjvParser(fullPath);
             
-            File.SetAttributes(fullPath, FileAttributes.Normal);
-            File.Delete(fullPath);
-
-            //                 //dxr.UlozPrehledy();
-            //                 
         }
 
         private void LoadPjvParser(string filepath)
@@ -145,7 +206,12 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
             if (File.Exists(filepath))
             {
                 // xd = StatisticsService.NactiDataStatistiky(sSoubor);
-                Data = StatisticsService.NactiDataStatistiky(filepath);
+                // Data = StatisticsService.NactiDataStatistiky(filepath);
+                
+                ((PrehledyStatistikViewModel)_prehledyStatistikUserControl.DataContext).Data = StatisticsService.NactiDataStatistiky(filepath);
+                ((PrehledyStatistikViewModel) _prehledyStatistikUserControl.DataContext).FilePath = filepath;
+
+                Debug.WriteLine("Načtení");
             }
         }
 

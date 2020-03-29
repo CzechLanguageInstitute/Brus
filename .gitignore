@@ -189,3 +189,7 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
+Idea
+*.idea
+
+.idea/.idea.Brus/.idea/contentModel.xml

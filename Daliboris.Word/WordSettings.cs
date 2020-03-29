@@ -21,9 +21,9 @@ namespace Daliboris.Statistiky.Word
         public WordSettings()
         {
             ZahrnoutTextOdstavce = true;
-            ZahrnoutTextZnakovychStylu = true;
-            OdstranitPocatecniAKoncoveMezery = false;
-            ZahrnoutPoznamkyPodCarou = false;
+            //ZahrnoutTextZnakovychStylu = true;
+            //OdstranitPocatecniAKoncoveMezery = false;
+            //ZahrnoutPoznamkyPodCarou = false;
             OdstranitTeckuUSlov = true;
             StylyLokace = new List<string>();
         }
