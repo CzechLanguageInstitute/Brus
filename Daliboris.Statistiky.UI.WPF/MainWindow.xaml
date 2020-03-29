@@ -55,7 +55,7 @@
 		        </fluent:RibbonGroupBox>
 	            <fluent:RibbonGroupBox Header="Ostatní">
 		            <!-- <fluent:Button LargeIcon="Images\Question.png" Header="Nápověda" /> -->
-		            <fluent:Button LargeIcon="Images\Info.png" Header="O aplikaci"/>
+		            <fluent:Button Command="{Binding AboutCommand}" LargeIcon="Images\Info.png" Header="O aplikaci"/>
 	            </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
         </fluent:Ribbon>

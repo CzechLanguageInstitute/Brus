@@ -49,6 +49,8 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
 
         public ICommand FilterTextCommand { get; set; }
         
+        public ICommand AboutCommand { get; set; }
+
         
         // Path to actual load file
         
@@ -89,9 +91,22 @@ namespace Daliboris.Statistiky.UI.WPF.ViewModels
             RozlisovatVelikostPismenCommand = new ActionCommand(new Action<object>(RozlisovatVelikostPismen));
             VelikostTextuCommand = new ActionCommand(new Action<object>(ZmenaVelikostiTextu)); 
             FilterTextCommand = new ActionCommand(new Action<object>(FilterText));
+            AboutCommand = new ActionCommand(new Action(ShowAbout));
+            
             _prehledyStatistikUserControl = prehledyStatistikUserControl;
         }
 
+
+        private void ShowAbout()
+        {
+            string messageBoxText = "Tato aplikace vznikla pod Ústavem pro jazyk český.";
+            string caption = "O aplikace";
+            var button = MessageBoxButton.OK;
+            var icon = MessageBoxImage.Information;
+            
+            MessageBox.Show(messageBoxText, caption, button, icon);
+
+        }
 
         private void FilterText(object text)
         { 
